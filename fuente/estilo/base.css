@@ -1,0 +1,83 @@
+
+  @font-face { font-family: "KaTeX_Main"; src: url(data:font/woff2;base64,__MAIN_R__) format("woff2"); font-style: normal; font-weight: 400; }
+  @font-face { font-family: "KaTeX_Main"; src: url(data:font/woff2;base64,__MAIN_I__) format("woff2"); font-style: italic; font-weight: 400; }
+
+  :root {
+    color-scheme: light;
+    --page: #ffffff;
+    --ink: #1b1d22;
+    --muted: #9097a1;
+    --soft: #5d636c;
+    --highlight: #f27305;
+    --red: #d91a14;
+    --line: #0000001f;
+    --serif: "KaTeX_Main", "Latin Modern Roman", "Iowan Old Style", Georgia, serif;
+    --ease: cubic-bezier(.2, .7, .2, 1);
+  }
+  html, body { background: var(--page); color: var(--ink); height: 100%; margin: 0; overflow: hidden; font-family: ui-sans-serif, system-ui, sans-serif; }
+  [hidden] { display: none !important; }
+
+  .slide {
+    position: fixed; inset: 0; display: flex; justify-content: center; align-items: flex-start;
+    padding: 10vh 16px; box-sizing: border-box; overflow-y: auto; background: var(--page);
+    opacity: 0; visibility: hidden;
+    transition: opacity .5s var(--ease), visibility 0s linear .5s;
+  }
+  .slide.is-on { opacity: 1; visibility: visible; transition: opacity .5s var(--ease), visibility 0s; }
+  .inner { width: min(86vw, 62em); font-family: var(--serif); margin: auto 0; }
+
+  .eyebrow { color: var(--muted); font-size: clamp(14px, 1.2vw, 20px); margin: 0 0 .6em; }
+  .heading { font-weight: 400; font-size: clamp(28px, 3vw, 52px); line-height: 1.15; margin: 0; text-wrap: balance; }
+  .question { font-size: clamp(19px, 1.8vw, 32px); line-height: 1.45; margin: .55em 0 0; color: var(--soft); max-width: 42em; }
+  .formula { font-size: clamp(18px, 1.8vw, 32px); overflow-x: auto; overflow-y: hidden; margin-top: .8em; }
+  .formula mjx-container[display="true"] { text-align: left !important; margin: .3em 0 !important; }
+  .formula--chart { color: var(--highlight); }
+  .note { font-size: clamp(17px, 1.5vw, 27px); line-height: 1.5; margin: .9em 0 0; color: var(--soft); max-width: 46em; }
+  .note b { color: var(--ink); font-weight: 400; }
+
+  .items { counter-reset: item; list-style: none; margin: 1.1em 0 0; padding: 0; display: grid; gap: .75em; font-size: clamp(18px, 1.7vw, 30px); line-height: 1.45; }
+  .items li { counter-increment: item; position: relative; padding-left: 1.7em; }
+  .items li::before { content: counter(item) "."; color: var(--muted); position: absolute; left: 0; }
+  .items--cols { grid-template-columns: repeat(auto-fit, minmax(12em, 1fr)); gap: 1em 2.5em; font-size: clamp(16px, 1.4vw, 25px); }
+  .result-line { color: var(--highlight); }
+  .theorem { margin-top: 1em; border: 1px solid var(--line); border-left: 3px solid var(--highlight); border-radius: 4px; padding: .8em 1.2em .9em; font-size: clamp(17px, 1.55vw, 28px); line-height: 1.45; }
+  .theorem p { margin: 0; }
+  .theorem p + p, .theorem .formula + p { margin-top: .4em; }
+  .theorem__title { color: var(--highlight); margin-bottom: .35em !important; letter-spacing: .02em; }
+  .theorem .formula { font-size: 1em; margin-top: .3em; }
+
+
+  [data-b] { opacity: 0; transform: translateY(.3em); transition: opacity .45s var(--ease), transform .45s var(--ease); }
+  [data-b].is-on { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { [data-b], .slide { transition: none; } }
+
+  /* hoverable symbols */
+  g[class*="def-"] { cursor: help; pointer-events: bounding-box; transition: color .2s, fill .2s; }
+  g[class*="def-"].hl, g[class*="def-"].hot { color: var(--highlight); fill: var(--highlight); stroke: var(--highlight); }
+  .formula--chart g[class*="def-"].hot, .result-line g[class*="def-"].hot { color: var(--red); fill: var(--red); stroke: var(--red); }
+
+  #tip {
+    position: fixed; z-index: 20; max-width: min(360px, calc(100vw - 24px));
+    background: var(--page); color: var(--ink); border: 1px solid var(--line); border-radius: 8px;
+    box-shadow: 0 10px 30px #1b1d2224; padding: .6em .85em;
+    font-family: var(--serif); font-size: 17px; line-height: 1.45; pointer-events: none;
+    opacity: 0; transform: translateY(4px); transition: opacity .15s, transform .15s;
+  }
+  #tip.show { opacity: 1; transform: none; }
+  #tip .term { display: block; color: var(--highlight); margin-bottom: .15em; }
+  #defs { position: absolute; left: -9999px; top: 0; width: 340px; visibility: hidden; }
+
+  .running-head { position: fixed; top: 2.4vh; left: 2.6vw; font-family: var(--serif); color: var(--muted); font-size: clamp(14px, 1.2vw, 20px); pointer-events: none; z-index: 5; }
+  .foot { position: fixed; bottom: 2vh; left: 2.6vw; right: 2.6vw; display: flex; justify-content: space-between; align-items: center; gap: 1em; color: var(--muted); font-size: 12px; z-index: 5; pointer-events: none; }
+  .foot .nav { display: flex; align-items: center; gap: .5em; pointer-events: auto; }
+  .foot button { font: inherit; font-size: 16px; line-height: 1; color: var(--muted); background: none; border: 1px solid var(--line); border-radius: 999px; width: 2em; height: 2em; cursor: pointer; }
+  .foot button:hover { color: var(--highlight); border-color: var(--highlight); }
+  .foot button:focus-visible { outline: 2px solid #f2730580; outline-offset: 2px; }
+  .counter { font-variant-numeric: tabular-nums; min-width: 3.5em; text-align: center; }
+
+  @media (max-width: 800px) {
+    .slide { align-items: flex-start; padding: 8vh 16px 80px; }
+    .inner { width: 100%; }
+    .foot .hint { display: none; }
+    .foot { justify-content: flex-end; background: linear-gradient(transparent, var(--page) 40%); bottom: 0; left: 0; right: 0; padding: 18px 16px 12px; }
+  }

@@ -1,0 +1,131 @@
+<!-- 1 · Enunciado -->
+<section class="slide" data-ex="1" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 1</h1>
+    <p class="question" style="color:var(--ink)">Sea \(\D{Xi}{X_1, X_2, X_3, X_4}\) una muestra aleatoria de una distribución \(\D{unif}{\text{Uniforme}[0,1]}\). Defina la variable aleatoria \(\D{Z}{Z} = \D{x3}{X_{(3)}} - \D{x2}{X_{(2)}}\). Calcule \(\D{P}{P}\bigl(\D{Z}{Z} \lt \tfrac15\bigr)\).</p>
+    <p class="note" data-b><b>Idea.</b> Primero hallamos la densidad de \(Z\), y después la integramos de \(0\) a \(\tfrac15\). Para eso seguimos cuatro pasos:</p>
+    <ol class="items">
+      <li data-b>Escribir la densidad conjunta de \(\D{x2}{X_{(2)}}\) y \(\D{x3}{X_{(3)}}\).</li>
+      <li data-b>Cambiar de variables para que \(\D{Z}{Z}\) sea una de ellas.</li>
+      <li data-b>Integrar la otra variable para quedarnos con la densidad de \(\D{Z}{Z}\).</li>
+      <li data-b>Integrar esa densidad de \(0\) a \(\tfrac15\).</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 2 · Lo que sabemos -->
+<section class="slide" data-ex="1" data-title="Lo que sabemos">
+  <div class="inner">
+    <p class="eyebrow">Antes de empezar</p>
+    <h2 class="heading">Lo que sabemos de la muestra</h2>
+    <p class="question">Cada observación es Uniforme en \([0,1]\), así que su densidad y su función de distribución son muy simples:</p>
+    <div class="formula" data-b>\[\D{f}{f(x)} = 1, \qquad \D{F}{F(x)} = x, \qquad 0 \le x \le 1, \qquad \D{n}{n} = 4\]</div>
+    <p class="note" data-b>Al ordenar la muestra de menor a mayor obtenemos los <b>estadísticos de orden</b>:</p>
+    <div class="formula" data-b>\[\D{x1}{X_{(1)}} \lt \D{x2}{X_{(2)}} \lt \D{x3}{X_{(3)}} \lt \D{x4}{X_{(4)}}\]</div>
+    <p class="note" data-b>\(Z = X_{(3)} - X_{(2)}\) es la distancia entre el segundo y el tercer valor. Como todos los valores están en \([0,1]\), \(Z\) también toma valores entre \(0\) y \(1\).</p>
+  </div>
+</section>
+
+<!-- 3 · Fórmula general -->
+<section class="slide" data-ex="1" data-title="La fórmula">
+  <div class="inner">
+    <p class="eyebrow">Paso 1 · La herramienta</p>
+    <h2 class="heading">Densidad conjunta de dos estadísticos de orden</h2>
+    <div class="theorem">
+      <p class="theorem__title">Teorema 3</p>
+      <p>Sea \(\D{Xi}{X_1, X_2, \dots, X_n}\) una muestra aleatoria de una distribución continua con p.d.f. \(\D{f}{f_X(x)}\) y c.d.f. \(\D{F}{F_X(x)}\). La p.d.f. conjunta de \(X_{(i)}\) y \(X_{(j)}\), con \(\D{i}{i} \lt \D{j}{j}\), está dada por</p>
+      <div class="formula">\[\begin{aligned}\D{fuv}{f_{X_{(i)},X_{(j)}}(u,v)} &= \D{coef}{\frac{n!}{(i-1)!\,(j-i-1)!\,(n-j)!}}\;\D{f}{f_X(u)}\,\D{f}{f_X(v)} \\ &\quad\cdot\ \D{below}{[F_X(u)]^{\,i-1}}\;\D{between}{[F_X(v)-F_X(u)]^{\,j-i-1}}\;\D{above}{[1-F_X(v)]^{\,n-j}}\end{aligned}\]</div>
+      <p>para \(-\infty \lt \D{u}{u} \lt \D{v}{v} \lt \infty\).</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · Nuestro caso -->
+<section class="slide" data-ex="1" data-title="Nuestro caso">
+  <div class="inner">
+    <p class="eyebrow">Paso 1 · Aplicar el Teorema 3</p>
+    <h2 class="heading">Nuestro caso: \(i = 2,\ j = 3,\ n = 4\)</h2>
+    <p class="question">Aplicamos el Teorema 3 con \(F_X(x) = x\) y \(f_X(x) = 1\). Hay una observación debajo de \(u\), ninguna entre \(u\) y \(v\), y una encima de \(v\).</p>
+    <p class="note" data-b data-hl="coef">El coeficiente:</p>
+    <div class="formula" data-b data-hl="coef">\[\D{coef}{\frac{4!}{1!\,0!\,1!}} = \D{fact}{\frac{24}{1\cdot1\cdot1}} = 24\]</div>
+    <p class="note" data-b>Cada factor queda:</p>
+    <div class="formula" data-b>\[\D{fuv}{f(u,v)} = 24\cdot \D{below}{u^{1}}\cdot \D{between}{(v-u)^{0}}\cdot \D{above}{(1-v)^{1}}\cdot \D{f}{1}\cdot \D{f}{1}\]</div>
+    <p class="note" data-b>Como \((v-u)^0 = 1\), la densidad conjunta de \(X_{(2)}\) y \(X_{(3)}\) es:</p>
+    <div class="formula formula--chart" data-b>\[\D{fuv}{f(u,v)} = 24\,\D{u}{u}\,(1-\D{v}{v}), \qquad 0 \lt u \lt v \lt 1\]</div>
+  </div>
+</section>
+
+<!-- 5 · Cambio de variable -->
+<section class="slide" data-ex="1" data-title="Cambio de variable">
+  <div class="inner">
+    <p class="eyebrow">Paso 2 · Hacer aparecer Z</p>
+    <h2 class="heading">Cambio de variable</h2>
+    <div class="theorem">
+      <p class="theorem__title">Teorema (cambio de variable)</p>
+      <p>Sea \((U,V)\) un vector aleatorio con densidad \(f_{U,V}\) y sea \((W,Z) = g(U,V)\), con \(g\) biyectiva sobre el soporte y con inversa \(u = h_1(w,z)\), \(v = h_2(w,z)\) de derivadas continuas. Entonces</p>
+      <div class="formula">\[\D{fwz}{f_{W,Z}(w,z)} = f_{U,V}\bigl(h_1(w,z),\,h_2(w,z)\bigr)\,\D{J}{|J|}, \qquad \D{J}{J} = \det\begin{pmatrix} \partial h_1/\partial w & \partial h_1/\partial z \\ \partial h_2/\partial w & \partial h_2/\partial z \end{pmatrix}\]</div>
+    </div>
+    <p class="note" data-b>Aplicamos el teorema con \((U,V) = (X_{(2)}, X_{(3)})\) y las variables nuevas</p>
+    <div class="formula" data-b>\[\D{w}{W} = \D{x2}{X_{(2)}}, \quad \D{Z}{Z} = \D{x3}{X_{(3)}} - \D{x2}{X_{(2)}} \qquad\Longrightarrow\qquad \D{u}{u} = \D{w}{w}, \quad \D{v}{v} = \D{w}{w} + \D{Z}{z}\]</div>
+    <div class="formula" data-b>\[\D{J}{J} = \det\begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix} = 1 \qquad\Longrightarrow\qquad \D{fwz}{f_{W,Z}(w,z)} = \D{fuv}{f(w,\,w+z)}\cdot 1 = 24\,w\,\bigl(1-(w+z)\bigr)\]</div>
+    <p class="note" data-b>Falta saber en qué región de \((w,z)\) vale esta fórmula. Lo vemos en la siguiente diapositiva.</p>
+  </div>
+</section>
+
+<!-- 5b · La nueva región -->
+<section class="slide" data-ex="1" data-title="La nueva región">
+  <div class="inner">
+    <p class="eyebrow">Paso 2 · La nueva región</p>
+    <h2 class="heading">¿Dónde vive \((W, Z)\)?</h2>
+    <p class="question">La densidad \(f(u,v)\) solo es positiva cuando \(0 \lt u \lt v \lt 1\). Esa cadena son tres desigualdades. En cada una sustituimos \(u = w\) y \(v = w + z\):</p>
+    <div class="formula" data-b>\[0 \lt \D{u}{u} \quad\Longrightarrow\quad 0 \lt \D{w}{w}\]</div>
+    <div class="formula" data-b>\[\D{u}{u} \lt \D{v}{v} \quad\Longrightarrow\quad \D{w}{w} \lt \D{w}{w} + \D{Z}{z} \quad\Longrightarrow\quad 0 \lt \D{Z}{z}\]</div>
+    <div class="formula" data-b>\[\D{v}{v} \lt 1 \quad\Longrightarrow\quad \D{w}{w} + \D{Z}{z} \lt 1\]</div>
+    <p class="note" data-b>También vale al revés: si \(w \gt 0\), \(z \gt 0\) y \(w + z \lt 1\), entonces \(u = w\) y \(v = w + z\) cumplen \(0 \lt u \lt v \lt 1\). Las dos regiones se corresponden exactamente.</p>
+    <p class="note" data-b>La región nueva es el triángulo con vértices \((0,0)\), \((1,0)\) y \((0,1)\). Para un \(z\) fijo, \(w\) va de \(0\) a \(1 - z\); esto lo usamos en el paso 3.</p>
+    <div class="formula formula--chart" data-b>\[\D{fwz}{f_{W,Z}(w,z)} = 24\,\D{w}{w}\,(1-\D{w}{w}-\D{Z}{z}), \qquad w \gt 0,\ z \gt 0,\ w + z \lt 1\]</div>
+  </div>
+</section>
+
+<!-- 6 · Densidad de Z -->
+<section class="slide" data-ex="1" data-title="Densidad de Z">
+  <div class="inner">
+    <p class="eyebrow">Paso 3 · Eliminar w</p>
+    <h2 class="heading">La densidad de \(Z\)</h2>
+    <p class="question">Para obtener la densidad marginal de \(Z\), integramos sobre todos los valores posibles de \(w\). Con \(z\) fijo, \(w\) va de \(0\) a \(1 - z\).</p>
+    <div class="formula" data-b>\[\D{fz}{f_Z(z)} = \int_0^{1-z} 24\,\D{w}{w}\,(1-z-\D{w}{w})\,d\D{w}{w}\]</div>
+    <p class="note" data-b>Para simplificar las cuentas escribimos \(\D{a}{a} = 1 - z\):</p>
+    <div class="formula" data-b>\[\int_0^{a} 24\,w\,(a-w)\,dw = 24\Bigl[\frac{a\,w^2}{2} - \frac{w^3}{3}\Bigr]_0^{a} = 24\Bigl(\frac{a^3}{2} - \frac{a^3}{3}\Bigr) = 24\cdot\frac{a^3}{6} = 4a^3\]</div>
+    <p class="note" data-b>Volviendo a \(a = 1 - z\):</p>
+    <div class="formula formula--chart" data-b>\[\D{fz}{f_Z(z)} = 4(1-z)^3, \qquad 0 \lt z \lt 1\]</div>
+    <p class="note" data-b><b>Comprobación.</b> \(\int_0^1 4(1-z)^3\,dz = \bigl[-(1-z)^4\bigr]_0^1 = 1\), así que es una densidad: la \(\D{beta}{\text{Beta}(1,4)}\).</p>
+  </div>
+</section>
+
+<!-- 7 · Probabilidad -->
+<section class="slide" data-ex="1" data-title="La probabilidad">
+  <div class="inner">
+    <p class="eyebrow">Paso 4 · La respuesta</p>
+    <h2 class="heading">La probabilidad</h2>
+    <p class="question">Ya tenemos la densidad de \(Z\). Solo falta integrarla de \(0\) a \(\tfrac15\).</p>
+    <div class="formula" data-b>\[\D{P}{P}\bigl(\D{Z}{Z} \lt \tfrac15\bigr) = \int_0^{1/5} \D{fz}{4(1-z)^3}\,dz\]</div>
+    <p class="note" data-b>Una primitiva de \(4(1-z)^3\) es \(-(1-z)^4\):</p>
+    <div class="formula" data-b>\[= \Bigl[-(1-z)^4\Bigr]_0^{1/5} = -\Bigl(\frac45\Bigr)^4 + 1 = 1 - \frac{256}{625}\]</div>
+    <div class="formula formula--chart" data-b>\[\D{P}{P}\bigl(\D{Z}{Z} \lt \tfrac15\bigr) = \frac{369}{625} \approx 0.5904\]</div>
+  </div>
+</section>
+
+<!-- 8 · Resumen -->
+<section class="slide" data-ex="1" data-title="Resumen">
+  <div class="inner">
+    <h2 class="heading">Resumen</h2>
+    <ol class="items">
+      <li data-b>Densidad conjunta: \(\D{fuv}{f(u,v)} = 24\,u\,(1-v)\) en \(0 \lt u \lt v \lt 1\).</li>
+      <li data-b>Cambio \(\D{w}{w} = u,\ \D{Z}{z} = v - u\), con \(\D{J}{|J|} = 1\): \(\D{fwz}{f_{W,Z}(w,z)} = 24\,w\,(1-w-z)\).</li>
+      <li data-b>Marginal: \(\D{fz}{f_Z(z)} = 4(1-z)^3\), una \(\D{beta}{\text{Beta}(1,4)}\).</li>
+      <li data-b class="result-line">\(\D{P}{P}(Z \lt \tfrac15) = 1 - (\tfrac45)^4 = \tfrac{369}{625} \approx 0.5904\).</li>
+    </ol>
+    <p class="note" data-b><b>Observación.</b> El mínimo \(\D{x1}{X_{(1)}}\) de cuatro uniformes da el mismo número: \(P(X_{(1)} \lt \tfrac15) = 1 - (\tfrac45)^4\). En una muestra uniforme, cada hueco entre valores ordenados consecutivos tiene la misma distribución \(\text{Beta}(1,n)\) que el mínimo.</p>
+  </div>
+</section>
+

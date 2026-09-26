@@ -1,0 +1,19 @@
+
+  /* recall boxes: basic facts the solution leans on */
+  .recall { margin-top: 1em; border: 1px solid var(--line); border-left: 3px solid var(--muted); border-radius: 4px; padding: .8em 1.2em .9em; font-size: clamp(17px, 1.55vw, 28px); line-height: 1.45; }
+  .recall p { margin: 0; }
+  .recall p + p, .recall .formula + p { margin-top: .4em; }
+  .recall__title { color: var(--soft); margin-bottom: .35em !important; letter-spacing: .02em; }
+  .recall .formula { font-size: 1em; margin-top: .3em; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em 2.5em; }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
+  .sub { color: var(--highlight); }
+
+  /* chapter index */
+  .ex-list { list-style: none; margin: 1.2em 0 0; padding: 0; display: grid; gap: .15em; }
+  .ex-list button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 1.6em 1fr; gap: .5em; width: 100%; padding: .45em .6em; border-radius: 6px; font-family: var(--serif); font-size: clamp(17px, 1.6vw, 28px); line-height: 1.35; color: var(--ink); transition: background .2s, color .2s; }
+  .ex-list button:hover { background: #f273050f; color: var(--highlight); }
+  .ex-list button:focus-visible { outline: 2px solid #f2730580; }
+  .ex-list .num { color: var(--muted); }
+  .ex-list button:hover .num { color: var(--highlight); }
+  .foot .idx { width: auto; padding: 0 .9em; font-size: 13px; }

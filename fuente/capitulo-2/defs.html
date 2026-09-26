@@ -1,0 +1,32 @@
+  <div data-k="Yn" data-t="\(Y_n\)">La variable número \(n\) de la sucesión. Lo que nos interesa es cómo se comporta cuando \(n\) crece.</div>
+  <div data-k="Xn" data-t="\(X_n\)">La variable número \(n\) de la sucesión.</div>
+  <div data-k="Zn" data-t="\(Z_n\)">Variable construida con la muestra de tamaño \(n\). Buscamos a qué distribución se acerca.</div>
+  <div data-k="bin" data-t="Binomial">\(\text{bin}(n, p)\): número de éxitos en \(n\) ensayos independientes, cada uno con probabilidad \(p\). Media \(np\), varianza \(np(1-p)\).</div>
+  <div data-k="ber" data-t="Bernoulli">\(\text{Ber}(p)\): vale 1 con probabilidad \(p\) y 0 con probabilidad \(1-p\). Es un solo ensayo.</div>
+  <div data-k="poi" data-t="Poisson">\(p(\lambda)\): cuenta eventos raros. \(P(X = k) = e^{-\lambda}\lambda^k/k!\), con media y varianza iguales a \(\lambda\).</div>
+  <div data-k="gam" data-t="Gamma">\(\Gamma(\alpha, \beta)\) con forma \(\alpha\) y escala \(\beta\): media \(\alpha\beta\), varianza \(\alpha\beta^2\).</div>
+  <div data-k="lam" data-t="\(\lambda\)">Extremo derecho del intervalo: ninguna observación pasa de \(\lambda\).</div>
+  <div data-k="theta" data-t="\(\theta\)">Parámetro de la distribución: un número fijo pero desconocido.</div>
+  <div data-k="xmin" data-t="\(X_{(1)}\)">El mínimo de la muestra.</div>
+  <div data-k="xmax" data-t="\(X_{(n)}\)">El máximo de la muestra.</div>
+  <div data-k="N" data-t="\(N\)">Número de observaciones (de las 72) que son mayores que 3.</div>
+  <div data-k="p" data-t="\(p\)">Probabilidad de que una sola observación sea un "éxito", aquí mayor que 3.</div>
+
+  <div data-ex="3" data-k="theta" data-t="\(\theta\)">Extremo derecho del intervalo: ninguna observación pasa de \(\theta\).</div>
+  <div data-ex="6" data-k="theta" data-t="\(\theta\)">Punto donde empieza la distribución: ninguna observación es menor que \(\theta\).</div>
+  <div data-ex="6" data-k="f" data-t="Densidad \(f\)">\(f(x) = e^{-(x-\theta)}\) para \(x \gt \theta\): una exponencial que empieza en \(\theta\).</div>
+  <div data-ex="7" data-k="f" data-t="Densidad \(f\)">\(f(x) = 3x^2\) en \((0,1)\): los valores cercanos a 1 son más probables.</div>
+  <div data-ex="7" data-k="xbar" data-t="\(\bar X_{50}\)">El promedio de las 50 observaciones.</div>
+  <div data-ex="7" data-k="mu" data-t="\(\mu\)">Media de una observación: \(\int_0^1 x \cdot 3x^2\,dx = 3/4\).</div>
+  <div data-ex="7" data-k="sigma2" data-t="\(\sigma^2\)">Varianza de una observación: \(E[X^2] - \mu^2 = 3/80\).</div>
+  <div data-ex="8" data-k="Yn" data-t="\(Y_n\)">Proporción de éxitos en los primeros \(n\) ensayos: la media muestral de las Bernoulli.</div>
+  <div data-ex="9" data-k="f" data-t="Densidad de Pareto">\(f(x) = \alpha x^{-\alpha-1}\), \(x \gt 1\): una distribución de cola pesada, con valores muy grandes posibles.</div>
+  <div data-ex="9" data-k="F" data-t="Distribución acumulada">\(F(x) = 1 - x^{-\alpha}\) para \(x \gt 1\).</div>
+  <div data-ex="9" data-k="Yn" data-t="\(Y_n\)">El máximo de las primeras \(n\) observaciones, dividido por \(n^{1/\alpha}\) para que no se vaya a infinito.</div>
+  <div data-ex="10" data-k="bin" data-t="\(\text{bin}(n, \lambda/n)\)">\(n\) ensayos, cada uno con probabilidad de éxito \(\lambda/n\). El número esperado de éxitos es siempre \(\lambda\).</div>
+  <div data-ex="11" data-k="xbar" data-t="\(\bar X_n\)">Media muestral de las \(n\) observaciones de Poisson. Su media es \(\lambda\) y su varianza \(\lambda/n\).</div>
+  <div data-ex="12" data-k="Xn" data-t="\(X_n = I_{[0,1/n]}\)">Vale 1 si el resultado \(\omega\) está en \([0, 1/n]\), y 0 si no. El intervalo se encoge al crecer \(n\).</div>
+  <div data-ex="13" data-k="Xn" data-t="\(X_n\)">Número de lanzamientos (de los \(n\)) en que las dos monedas salen sello.</div>
+  <div data-ex="13" data-k="bin" data-t="\(\text{bin}(n, 1/4)\)">\(n\) lanzamientos independientes; en cada uno, "ninguna cara" tiene probabilidad \(1/4\).</div>
+  <div data-ex="14" data-k="f" data-t="Densidad \(f\)">\(f(x) = 1/x^2\) para \(x \gt 1\).</div>
+  <div data-ex="14" data-k="bin" data-t="\(\text{bin}(72, p)\)">72 observaciones independientes, cada una "éxito" (mayor que 3) con probabilidad \(p\).</div>

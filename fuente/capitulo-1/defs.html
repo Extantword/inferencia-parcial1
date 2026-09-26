@@ -1,0 +1,58 @@
+  <!-- Ejercicio 2 -->
+  <div data-ex="2" data-k="Xi" data-t="Muestra aleatoria">Diez observaciones independientes, todas Uniforme en \([0,\theta]\).</div>
+  <div data-ex="2" data-k="unif" data-t="Uniforme\([0,\theta]\)">Todos los valores entre \(0\) y \(\theta\) son igual de probables. Densidad \(f(x) = 1/\theta\).</div>
+  <div data-ex="2" data-k="theta" data-t="\(\theta\)">Extremo derecho del intervalo: ninguna observación pasa de \(\theta\).</div>
+  <div data-ex="2" data-k="xmin" data-t="\(X_{(1)}\)">El mínimo de las diez observaciones. Es lo que suponemos conocido.</div>
+  <div data-ex="2" data-k="xmax" data-t="\(X_{(10)}\)">El máximo de las diez observaciones. Es la variable cuya distribución buscamos.</div>
+  <div data-ex="2" data-k="f" data-t="Densidad \(f\)">Para la Uniforme\([0,\theta]\), \(f(x) = 1/\theta\) en todo el intervalo.</div>
+  <div data-ex="2" data-k="F" data-t="Distribución acumulada \(F\)">\(F(x) = P(X_i \le x) = x/\theta\): la fracción del intervalo que queda a la izquierda de \(x\).</div>
+  <div data-ex="2" data-k="cond" data-t="Densidad condicional">Densidad de \(X_{(10)}\) cuando ya sabemos que \(X_{(1)} = u\). Es una densidad en \(v\); \(u\) queda fijo.</div>
+  <div data-ex="2" data-k="fuv" data-t="Densidad conjunta">Densidad del par \((X_{(1)}, X_{(10)})\): \(u\) es el valor del mínimo y \(v\) el del máximo.</div>
+  <div data-ex="2" data-k="fu" data-t="Densidad del mínimo">Densidad de \(X_{(1)}\) sola, sin fijarnos en el máximo.</div>
+
+  <!-- Ejercicio 3 -->
+  <div data-ex="3" data-k="f" data-t="Densidad de la duración">\(f(t) = \tfrac25 e^{-2t/5}\): exponencial con media \(\tfrac52 = 2.5\) años.</div>
+  <div data-ex="3" data-k="F" data-t="Distribución acumulada">\(F(t) = P(T_i \le t) = 1 - e^{-2t/5}\): probabilidad de que una componente falle antes de \(t\) años.</div>
+  <div data-ex="3" data-k="S" data-t="Supervivencia">\(P(T_i \gt t) = e^{-2t/5}\): probabilidad de que una componente siga funcionando después de \(t\) años.</div>
+  <div data-ex="3" data-k="T" data-t="\(T_1, T_2, T_3\)">Duraciones (en años) de las tres componentes. Son independientes y tienen la misma distribución.</div>
+  <div data-ex="3" data-k="xmin" data-t="\(T_{(1)}\)">La duración más corta de las tres: el momento en que falla la primera componente.</div>
+  <div data-ex="3" data-k="xmax" data-t="\(T_{(3)}\)">La duración más larga de las tres: el momento en que falla la última componente.</div>
+  <div data-ex="3" data-k="fk" data-t="Densidad del estadístico de orden">Densidad de la duración del sistema: \(T_{(1)}\) en serie o \(T_{(3)}\) en paralelo.</div>
+
+  <!-- Ejercicio 4 -->
+  <div data-ex="4" data-k="Xi" data-t="Muestra aleatoria">\(n\) observaciones independientes, todas normales estándar.</div>
+  <div data-ex="4" data-k="xk" data-t="\(X_{(5)}\)">El quinto valor más pequeño de la muestra.</div>
+  <div data-ex="4" data-k="p" data-t="\(p\)">Probabilidad de que una sola observación sea menor que \(2.5\): \(\Phi(2.5) \approx 0.9938\).</div>
+  <div data-ex="4" data-k="F" data-t="Distribución acumulada \(F\)">Para la normal estándar, \(F(x) = \Phi(x)\).</div>
+
+  <!-- Ejercicio 5 -->
+  <div data-ex="5" data-k="Xi" data-t="Muestra aleatoria">Nueve observaciones independientes, todas Uniforme\([0,1]\).</div>
+  <div data-ex="5" data-k="me" data-t="Mediana \(M_e\)">El valor del medio de la muestra ordenada. Con 9 datos es \(X_{(5)}\): 4 por debajo y 4 por encima.</div>
+  <div data-ex="5" data-k="xk" data-t="\(X_{(5)}\)">El quinto valor más pequeño de las nueve observaciones.</div>
+  <div data-ex="5" data-k="p" data-t="\(p\)">Probabilidad de que una observación sea menor que \(0.45\): \(F(0.45) = 0.45\).</div>
+  <div data-ex="5" data-k="f" data-t="Densidad \(f\)">Para la Uniforme\([0,1]\), \(f(x) = 1\).</div>
+  <div data-ex="5" data-k="F" data-t="Distribución acumulada \(F\)">Para la Uniforme\([0,1]\), \(F(x) = x\).</div>
+
+  <!-- Ejercicio 6 -->
+  <div data-ex="6" data-k="f" data-t="Densidad \(f\)">\(f(x \mid \theta) = e^{-(x-\theta)}\) para \(x \gt \theta\): una exponencial que empieza en \(\theta\).</div>
+  <div data-ex="6" data-k="theta" data-t="\(\theta\)">Punto donde empieza la distribución: ninguna observación es menor que \(\theta\).</div>
+  <div data-ex="6" data-k="F" data-t="Distribución acumulada \(F\)">\(F(x) = 1 - e^{-(x-\theta)}\) para \(x \gt \theta\).</div>
+  <div data-ex="6" data-k="S" data-t="Probabilidad de cola">\(P(X_i \gt x) = e^{-(x-\theta)}\): decrece desde 1 (en \(x = \theta\)) hacia 0.</div>
+
+  <!-- Ejercicio 7 -->
+  <div data-ex="7" data-k="theta" data-t="\(\theta\)">Tasa de la exponencial. La media es \(1/\theta\).</div>
+  <div data-ex="7" data-k="n" data-t="\(n = 2k+1\)">Tamaño de muestra impar, para que haya un único valor en el medio.</div>
+  <div data-ex="7" data-k="me" data-t="Mediana \(M_e\)">El valor del medio: \(X_{(k+1)}\), con \(k\) observaciones debajo y \(k\) encima.</div>
+  <div data-ex="7" data-k="f" data-t="Densidad exponencial">\(f(x) = \theta e^{-\theta x}\), \(x \gt 0\).</div>
+  <div data-ex="7" data-k="F" data-t="Distribución acumulada">\(F(x) = 1 - e^{-\theta x}\), \(x \gt 0\).</div>
+  <div data-ex="7" data-k="S" data-t="Probabilidad de cola">\(P(X_i \gt x) = e^{-\theta x}\).</div>
+  <div data-ex="7" data-k="p" data-t="\(p\)">\(p = F\bigl(\tfrac{3}{2\theta}\bigr) = 1 - e^{-3/2} \approx 0.7769\): probabilidad de que una observación sea menor que \(\tfrac{3}{2\theta}\).</div>
+  <div data-ex="7" data-k="fk" data-t="Densidad de la mediana">Densidad de \(X_{(k+1)}\), el valor del medio.</div>
+
+  <!-- Ejercicio 8 -->
+  <div data-ex="8" data-k="f" data-t="Densidad \(f\)">\(f(x) = 1\) en \((0,1)\): la Uniforme\([0,1]\), con \(F(x) = x\).</div>
+  <div data-ex="8" data-k="Z" data-t="\(Z\)">Punto medio entre el mínimo y el máximo de la muestra: \(\bigl(X_{(1)} + X_{(3)}\bigr)/2\).</div>
+  <div data-ex="8" data-k="R" data-t="\(R\)">Rango de la muestra: \(X_{(3)} - X_{(1)}\), la distancia entre el máximo y el mínimo. Variable auxiliar.</div>
+  <div data-ex="8" data-k="fuv" data-t="Densidad conjunta">Densidad del par \((X_{(1)}, X_{(3)})\): \(u\) es el mínimo y \(v\) el máximo.</div>
+  <div data-ex="8" data-k="fz" data-t="Densidad de \(Z\)">Densidad del punto medio: se obtiene integrando la conjunta de \((Z, R)\) sobre todos los valores de \(r\).</div>
+  <div data-ex="8" data-k="J" data-t="Jacobiano">Determinante de las derivadas de \((u, v)\) respecto a \((z, r)\). Aquí vale 1.</div>

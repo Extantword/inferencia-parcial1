@@ -1,0 +1,520 @@
+<!-- ===================== Ejercicio 1 ===================== -->
+<section class="slide" data-ex="1" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 1</h1>
+    <p class="question" style="color:var(--ink)">Sea \(\{Y_n\}_{n \in \mathbb{N}}\) una sucesión de variables aleatorias con \(\D{Yn}{Y_n} \sim \D{bin}{\text{bin}(n, \alpha)}\). Muestre que \(\D{cp}{\dfrac{Y_n}{n} \xrightarrow{p} \alpha}\).</p>
+    <div class="recall" data-b>
+      <p class="recall__title">Recordatorio · Convergencia en probabilidad</p>
+      <p>\(W_n \xrightarrow{p} c\) significa que, para cualquier distancia \(\D{eps}{\varepsilon} \gt 0\) que fijemos,</p>
+      <div class="formula">\[\D{P}{P}\bigl(|W_n - c| \ge \varepsilon\bigr) \xrightarrow[n \to \infty]{} 0\]</div>
+      <p>En palabras: la probabilidad de que \(W_n\) quede lejos de \(c\) se hace cada vez más pequeña.</p>
+    </div>
+    <p class="note" data-b><b>Qué significa aquí.</b> \(Y_n/n\) es la proporción de éxitos en \(n\) ensayos. Hay que mostrar que se acerca a la probabilidad de éxito \(\alpha\).</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="1" data-title="Chebyshev">
+  <div class="inner">
+    <p class="eyebrow">La herramienta</p>
+    <h2 class="heading">La desigualdad de Chebyshev</h2>
+    <div class="theorem">
+      <p class="theorem__title">Teorema · Desigualdad de Chebyshev</p>
+      <p>Si \(W\) tiene media \(E[W]\) y varianza finita, para todo \(\varepsilon \gt 0\):</p>
+      <div class="formula">\[\D{P}{P}\bigl(|W - \D{E}{E[W]}| \ge \D{eps}{\varepsilon}\bigr) \le \frac{\D{Var}{\text{Var}(W)}}{\varepsilon^2}\]</div>
+    </div>
+    <p class="note" data-b><b>Receta.</b> Para probar \(W_n \xrightarrow{p} c\) basta con:</p>
+    <ol class="items">
+      <li data-b>ver que \(E[W_n] = c\);</li>
+      <li data-b>ver que \(\text{Var}(W_n) \to 0\).</li>
+    </ol>
+    <p class="note" data-b>Entonces la cota \(\text{Var}(W_n)/\varepsilon^2\) tiende a \(0\), y la probabilidad, que está entre \(0\) y esa cota, también.</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="1" data-title="Aplicar">
+  <div class="inner">
+    <p class="eyebrow">Aplicar la receta</p>
+    <h2 class="heading">Media y varianza de \(Y_n / n\)</h2>
+    <div class="recall">
+      <p class="recall__title">Recordatorio · Binomial y constantes</p>
+      <p>Si \(Y \sim \text{bin}(n, \alpha)\): \(E[Y] = n\alpha\) y \(\text{Var}(Y) = n\alpha(1-\alpha)\). Además \(E[cY] = c\,E[Y]\) y \(\text{Var}(cY) = c^2\,\text{Var}(Y)\).</p>
+    </div>
+    <div class="formula" data-b>\[\D{E}{E}\Bigl[\frac{Y_n}{n}\Bigr] = \frac{n\alpha}{n} = \alpha, \qquad \D{Var}{\text{Var}}\Bigl(\frac{Y_n}{n}\Bigr) = \frac{n\alpha(1-\alpha)}{n^2} = \frac{\alpha(1-\alpha)}{n}\]</div>
+    <p class="note" data-b>Chebyshev con \(W = Y_n/n\):</p>
+    <div class="formula" data-b>\[0 \le \D{P}{P}\Bigl(\Bigl|\frac{Y_n}{n} - \alpha\Bigr| \ge \varepsilon\Bigr) \le \frac{\alpha(1-\alpha)}{n\,\varepsilon^2} \xrightarrow[n\to\infty]{} 0\]</div>
+    <div class="formula formula--chart" data-b>\[\text{Por lo tanto}\qquad \D{cp}{\frac{Y_n}{n} \xrightarrow{p} \alpha}\]</div>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 2 ===================== -->
+<section class="slide" data-ex="2" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 2</h1>
+    <p class="question" style="color:var(--ink)">Sea \(\{Y_n\}_{n \in \mathbb{N}}\) una sucesión de variables aleatorias con \(\D{E}{E[Y_n]} = \D{mu}{\mu}\) y \(\D{Var}{\text{Var}[Y_n]} = \dfrac{3}{n^3}\). Muestre que \(\D{cp}{Y_n \xrightarrow{p} \mu}\).</p>
+    <div class="theorem" data-b>
+      <p class="theorem__title">Teorema · Desigualdad de Chebyshev</p>
+      <div class="formula">\[\D{P}{P}\bigl(|W - E[W]| \ge \D{eps}{\varepsilon}\bigr) \le \frac{\text{Var}(W)}{\varepsilon^2}\]</div>
+    </div>
+    <p class="note" data-b>Es la misma receta del ejercicio 1: la media ya es \(\mu\), y la varianza \(3/n^3\) tiende a \(0\).</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="2" data-title="Aplicar">
+  <div class="inner">
+    <p class="eyebrow">Aplicar Chebyshev</p>
+    <h2 class="heading">La cota tiende a cero</h2>
+    <p class="question">Fijamos cualquier \(\varepsilon \gt 0\) y usamos \(W = Y_n\):</p>
+    <div class="formula" data-b>\[0 \le \D{P}{P}\bigl(|Y_n - \mu| \ge \D{eps}{\varepsilon}\bigr) \le \frac{3/n^3}{\varepsilon^2} = \frac{3}{n^3\,\varepsilon^2}\]</div>
+    <p class="note" data-b>Como \(\varepsilon\) está fijo y \(n^3 \to \infty\), la fracción tiende a \(0\). La probabilidad queda atrapada entre \(0\) y algo que tiende a \(0\):</p>
+    <div class="formula" data-b>\[\lim_{n\to\infty} P\bigl(|Y_n - \mu| \ge \varepsilon\bigr) = 0 \quad\text{para todo } \varepsilon \gt 0\]</div>
+    <div class="formula formula--chart" data-b>\[\D{cp}{Y_n \xrightarrow{p} \mu}\]</div>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 3 ===================== -->
+<section class="slide" data-ex="3" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 3</h1>
+    <p class="question" style="color:var(--ink)">Sea \(X_1, \dots, X_n\) una muestra aleatoria de una \(\text{Uniforme}[0, \D{theta}{\theta}]\). Muestre que \(\D{xmin}{X_{(1)}} \xrightarrow{p} 0\) y \(\D{xmax}{X_{(n)}} \xrightarrow{p} \theta\).</p>
+    <p class="note" data-b><b>Intuición.</b> Con muchos datos, el más pequeño queda pegado a \(0\) y el más grande queda pegado a \(\theta\).</p>
+    <div class="recall" data-b>
+      <p class="recall__title">Recordatorio · Mínimo y máximo</p>
+      <p>Con \(F(x) = x/\theta\) y observaciones independientes:</p>
+      <div class="formula">\[P\bigl(X_{(1)} \gt x\bigr) = \bigl[1 - F(x)\bigr]^n = \Bigl(1 - \frac{x}{\theta}\Bigr)^n, \qquad P\bigl(X_{(n)} \le x\bigr) = F(x)^n = \Bigl(\frac{x}{\theta}\Bigr)^n\]</div>
+      <p>El mínimo pasa de \(x\) si todas pasan de \(x\); el máximo no pasa de \(x\) si ninguna pasa de \(x\).</p>
+    </div>
+    <div class="recall" data-b>
+      <p class="recall__title">Recordatorio · Potencias</p>
+      <p>Si \(0 \le r \lt 1\), entonces \(r^n \to 0\) cuando \(n \to \infty\).</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-ex="3" data-title="El mínimo">
+  <div class="inner">
+    <p class="eyebrow">Parte 1</p>
+    <h2 class="heading">\(X_{(1)} \xrightarrow{p} 0\)</h2>
+    <p class="question">Fijamos \(\varepsilon\) con \(0 \lt \varepsilon \lt \theta\). (Si \(\varepsilon \ge \theta\), la probabilidad ya es \(0\), porque \(X_{(1)} \le \theta\).)</p>
+    <p class="note" data-b>Como \(X_{(1)} \ge 0\), estar lejos de \(0\) significa ser grande: \(|X_{(1)} - 0| \ge \varepsilon\) es lo mismo que \(X_{(1)} \ge \varepsilon\).</p>
+    <div class="formula" data-b>\[\D{P}{P}\bigl(|X_{(1)} - 0| \ge \D{eps}{\varepsilon}\bigr) = P\bigl(X_{(1)} \ge \varepsilon\bigr) = \Bigl(1 - \frac{\varepsilon}{\theta}\Bigr)^n\]</div>
+    <p class="note" data-b>El número \(r = 1 - \varepsilon/\theta\) está entre \(0\) y \(1\), así que \(r^n \to 0\).</p>
+    <div class="formula formula--chart" data-b>\[\lim_{n\to\infty} P\bigl(|X_{(1)}| \ge \varepsilon\bigr) = 0 \qquad\Longrightarrow\qquad X_{(1)} \xrightarrow{p} 0\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="3" data-title="El máximo">
+  <div class="inner">
+    <p class="eyebrow">Parte 2</p>
+    <h2 class="heading">\(X_{(n)} \xrightarrow{p} \theta\)</h2>
+    <p class="question">Como \(X_{(n)} \le \theta\), estar lejos de \(\theta\) significa quedarse corto: \(|X_{(n)} - \theta| \ge \varepsilon\) es lo mismo que \(X_{(n)} \le \theta - \varepsilon\).</p>
+    <div class="formula" data-b>\[\D{P}{P}\bigl(|X_{(n)} - \theta| \ge \D{eps}{\varepsilon}\bigr) = P\bigl(X_{(n)} \le \theta - \varepsilon\bigr) = \Bigl(\frac{\theta - \varepsilon}{\theta}\Bigr)^n\]</div>
+    <p class="note" data-b>Otra vez \(r = (\theta - \varepsilon)/\theta\) está entre \(0\) y \(1\), así que \(r^n \to 0\).</p>
+    <div class="formula formula--chart" data-b>\[\lim_{n\to\infty} P\bigl(|X_{(n)} - \theta| \ge \varepsilon\bigr) = 0 \qquad\Longrightarrow\qquad X_{(n)} \xrightarrow{p} \theta\]</div>
+    <p class="note" data-b>Por eso \(X_{(n)}\) es un buen estimador de \(\theta\): con muchos datos queda muy cerca del verdadero valor.</p>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 4 ===================== -->
+<section class="slide" data-ex="4" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 4</h1>
+    <p class="question" style="color:var(--ink)">Sea \(\{X_n\}_{n \in \mathbb{N}}\) una sucesión de variables aleatorias con \(\D{Xn}{X_n} \sim \D{gam}{\Gamma\bigl(n, \tfrac1n\bigr)}\). Muestre que \(\D{cp}{X_n \xrightarrow{p} 1}\).</p>
+    <div class="recall" data-b>
+      <p class="recall__title">Recordatorio · Distribución gamma</p>
+      <p>Si \(X \sim \Gamma(\alpha, \beta)\), con forma \(\alpha\) y escala \(\beta\):</p>
+      <div class="formula">\[\D{E}{E[X]} = \alpha\beta, \qquad \D{Var}{\text{Var}(X)} = \alpha\beta^2\]</div>
+    </div>
+    <p class="note" data-b>Aquí \(\alpha = n\) y \(\beta = \tfrac1n\). (Tomamos el segundo parámetro como escala: con la otra convención la media sería \(n^2\) y no podría acercarse a \(1\).)</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="4" data-title="Aplicar">
+  <div class="inner">
+    <p class="eyebrow">Aplicar Chebyshev</p>
+    <h2 class="heading">Media 1, varianza que tiende a 0</h2>
+    <div class="formula" data-b>\[\D{E}{E[X_n]} = n \cdot \frac1n = 1, \qquad \D{Var}{\text{Var}(X_n)} = n \cdot \frac{1}{n^2} = \frac1n\]</div>
+    <div class="theorem" data-b>
+      <p class="theorem__title">Teorema · Desigualdad de Chebyshev</p>
+      <div class="formula">\[P\bigl(|W - E[W]| \ge \varepsilon\bigr) \le \frac{\text{Var}(W)}{\varepsilon^2}\]</div>
+    </div>
+    <div class="formula" data-b>\[0 \le \D{P}{P}\bigl(|X_n - 1| \ge \D{eps}{\varepsilon}\bigr) \le \frac{1/n}{\varepsilon^2} = \frac{1}{n\,\varepsilon^2} \xrightarrow[n\to\infty]{} 0\]</div>
+    <div class="formula formula--chart" data-b>\[\D{cp}{X_n \xrightarrow{p} 1}\]</div>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 5 ===================== -->
+<section class="slide" data-ex="5" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 5</h1>
+    <p class="question" style="color:var(--ink)">Sea \(X_1, \dots, X_n\) una muestra aleatoria de una \(\text{Uniforme}[0, \D{lam}{\lambda}]\) y sea \(\D{Zn}{Z_n = n\bigl(\lambda - X_{(n)}\bigr)}\). Muestre que \(Z_n\) converge en distribución y halle la distribución límite.</p>
+    <div class="recall" data-b>
+      <p class="recall__title">Recordatorio · Convergencia en distribución</p>
+      <p>\(Z_n \xrightarrow{d} Z\) significa que las funciones de distribución se acercan:</p>
+      <div class="formula">\[\D{cd}{P(Z_n \le z) \xrightarrow[n\to\infty]{} P(Z \le z)}\quad\text{en cada } z \text{ donde } P(Z \le z) \text{ es continua}\]</div>
+    </div>
+    <p class="note" data-b><b>Receta.</b> Calcular \(P(Z_n \le z)\) para cada \(n\), tomar el límite, y reconocer qué distribución es.</p>
+    <p class="note" data-b><b>Intuición.</b> \(\lambda - X_{(n)}\) es lo que le falta al máximo para llegar a \(\lambda\). Es muy pequeño, del orden de \(1/n\); multiplicar por \(n\) lo "amplía" para ver su forma.</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="5" data-title="Distribución de Zn">
+  <div class="inner">
+    <p class="eyebrow">Paso 1</p>
+    <h2 class="heading">La función de distribución de \(Z_n\)</h2>
+    <p class="question">\(Z_n \ge 0\) siempre, así que \(P(Z_n \le z) = 0\) si \(z \lt 0\). Para \(z \ge 0\) (y \(n\) grande, de modo que \(z/n \lt \lambda\)):</p>
+    <div class="formula" data-b>\[P(Z_n \le z) = P\Bigl(\lambda - X_{(n)} \le \frac zn\Bigr) = P\Bigl(X_{(n)} \ge \lambda - \frac zn\Bigr) = 1 - P\Bigl(X_{(n)} \lt \lambda - \frac zn\Bigr)\]</div>
+    <p class="note" data-b>El máximo es menor que un valor si todas lo son, y \(F(x) = x/\lambda\):</p>
+    <div class="formula" data-b>\[P\Bigl(X_{(n)} \lt \lambda - \frac zn\Bigr) = \Bigl(\frac{\lambda - z/n}{\lambda}\Bigr)^n = \Bigl(1 - \frac{z/\lambda}{n}\Bigr)^n\]</div>
+    <div class="formula formula--chart" data-b>\[P(Z_n \le z) = 1 - \Bigl(1 - \frac{z/\lambda}{n}\Bigr)^n, \qquad z \ge 0\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="5" data-title="El límite">
+  <div class="inner">
+    <p class="eyebrow">Paso 2</p>
+    <h2 class="heading">Tomar el límite</h2>
+    <div class="theorem">
+      <p class="theorem__title">Límite clave</p>
+      <div class="formula">\[\Bigl(1 + \frac{c}{n}\Bigr)^n \xrightarrow[n\to\infty]{} \D{e}{e}^{\,c} \qquad\text{para cualquier número } c\]</div>
+    </div>
+    <p class="note" data-b>Con \(c = -z/\lambda\):</p>
+    <div class="formula" data-b>\[\lim_{n\to\infty} P(Z_n \le z) = 1 - e^{-z/\lambda}, \qquad z \ge 0\]</div>
+    <p class="note" data-b>Esa es la función de distribución de una exponencial con media \(\lambda\) (densidad \(\tfrac1\lambda e^{-z/\lambda}\)). Para \(z \lt 0\) el límite es \(0\), igual que en la exponencial.</p>
+    <div class="formula formula--chart" data-b>\[\D{cd}{Z_n = n\bigl(\lambda - X_{(n)}\bigr) \xrightarrow{d} \text{Exponencial con media } \lambda}\]</div>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 6 ===================== -->
+<section class="slide" data-ex="6" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 6</h1>
+    <p class="question" style="color:var(--ink)">Sea \(X_1, \dots, X_n\) una muestra aleatoria de una distribución con densidad \(\D{f}{f(x) = e^{-(x-\theta)}}\), \(x \gt \D{theta}{\theta}\), \(\theta \gt 0\). Sea \(\D{Zn}{Z_n = n\bigl(X_{(1)} - \theta\bigr)}\). Halle la distribución límite de \(Z_n\).</p>
+    <p class="note" data-b><b>Receta.</b> Igual que en el ejercicio 5: calcular \(P(Z_n \le z)\) y tomar el límite.</p>
+    <div class="recall" data-b>
+      <p class="recall__title">Recordatorio · Del capítulo 1, ejercicio 6</p>
+      <p>Para esta densidad, \(P(X_i \gt x) = e^{-(x-\theta)}\), y para el mínimo (todas deben pasar de \(x\)):</p>
+      <div class="formula">\[P\bigl(X_{(1)} \gt x\bigr) = e^{-n(x-\theta)}, \qquad x \gt \theta\]</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-ex="6" data-title="Calcular">
+  <div class="inner">
+    <p class="eyebrow">El cálculo</p>
+    <h2 class="heading">La distribución de \(Z_n\) no depende de \(n\)</h2>
+    <p class="question">\(Z_n \ge 0\) porque \(X_{(1)} \gt \theta\). Para \(z \gt 0\):</p>
+    <div class="formula" data-b>\[P(Z_n \le z) = P\Bigl(X_{(1)} \le \theta + \frac zn\Bigr) = 1 - P\Bigl(X_{(1)} \gt \theta + \frac zn\Bigr) = 1 - e^{-n \cdot z/n}\]</div>
+    <div class="formula" data-b>\[P(Z_n \le z) = 1 - e^{-z}, \qquad z \gt 0\]</div>
+    <p class="note" data-b>La \(n\) se cancela: \(Z_n\) tiene exactamente la misma distribución para todo \(n\). Así que el límite es esa misma distribución.</p>
+    <div class="formula formula--chart" data-b>\[\D{cd}{Z_n = n\bigl(X_{(1)} - \theta\bigr) \xrightarrow{d} \text{Exponencial con media } 1}, \qquad F(z) = 1 - e^{-z},\ z \gt 0\]</div>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 7 ===================== -->
+<section class="slide" data-ex="7" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 7</h1>
+    <p class="question" style="color:var(--ink)">Sea \(X_1, \dots, X_{50}\) una muestra aleatoria con densidad \(\D{f}{f(x) = 3x^2}\), \(0 \lt x \lt 1\). Si \(\D{xbar}{\bar X_{50}}\) es la media muestral, calcule aproximadamente \(\D{P}{P}\bigl(\tfrac{5}{11} \lt \bar X_{50} \lt \tfrac{6}{11}\bigr)\).</p>
+    <p class="note" data-b><b>Idea.</b> "Aproximadamente" con una media muestral casi siempre significa: usar el <b>teorema del límite central</b>.</p>
+    <div class="theorem" data-b>
+      <p class="theorem__title">Teorema del límite central</p>
+      <p>Si \(X_1, \dots, X_n\) son independientes, con la misma distribución, media \(\D{mu}{\mu}\) y varianza \(\D{sigma2}{\sigma^2}\) finita, entonces</p>
+      <div class="formula">\[\frac{\bar X_n - \mu}{\sigma / \sqrt n} \xrightarrow{d} \D{N01}{N(0,1)}\]</div>
+      <p>En la práctica: para \(n\) grande, \(\bar X_n\) es aproximadamente normal con media \(\mu\) y varianza \(\sigma^2/n\).</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-ex="7" data-title="Media y varianza">
+  <div class="inner">
+    <p class="eyebrow">Paso 1</p>
+    <h2 class="heading">Media y varianza de una observación</h2>
+    <p class="question">Se integran contra la densidad: \(E[X] = \int x f(x)\,dx\) y \(E[X^2] = \int x^2 f(x)\,dx\).</p>
+    <div class="formula" data-b>\[\D{mu}{\mu} = \int_0^1 x \cdot 3x^2\,dx = \frac34, \qquad E[X^2] = \int_0^1 x^2 \cdot 3x^2\,dx = \frac35\]</div>
+    <div class="formula" data-b>\[\D{sigma2}{\sigma^2} = E[X^2] - \mu^2 = \frac35 - \frac{9}{16} = \frac{3}{80}\]</div>
+    <p class="note" data-b>Para la media de \(50\) observaciones:</p>
+    <div class="formula formula--chart" data-b>\[\bar X_{50} \approx N\Bigl(\frac34,\ \frac{3/80}{50}\Bigr) = N\bigl(0.75,\ 0.00075\bigr), \qquad \text{desviación} = \sqrt{0.00075} \approx 0.0274\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="7" data-title="Estandarizar">
+  <div class="inner">
+    <p class="eyebrow">Paso 2</p>
+    <h2 class="heading">Estandarizar y usar la tabla</h2>
+    <p class="question">Restamos la media y dividimos por la desviación en los dos extremos: \(\tfrac{5}{11} \approx 0.4545\) y \(\tfrac{6}{11} \approx 0.5455\).</p>
+    <div class="formula" data-b>\[z_1 = \frac{0.4545 - 0.75}{0.0274} \approx -10.79, \qquad z_2 = \frac{0.5455 - 0.75}{0.0274} \approx -7.47\]</div>
+    <div class="formula formula--chart" data-b>\[\D{P}{P}\bigl(\tfrac{5}{11} \lt \bar X_{50} \lt \tfrac{6}{11}\bigr) \approx \D{Phi}{\Phi(-7.47)} - \D{Phi}{\Phi(-10.79)} \approx 0\]</div>
+    <p class="note" data-b><b>¿Por qué da prácticamente cero?</b> La media de la población es \(0.75\) y el intervalo \((0.45,\ 0.55)\) está a más de \(7\) desviaciones por debajo. Con \(50\) datos, el promedio casi nunca se aleja tanto de \(0.75\).</p>
+    <p class="note" data-b>El procedimiento es el mismo para cualquier intervalo: calcular \(\mu\) y \(\sigma^2\), estandarizar, y leer \(\Phi\) en la tabla.</p>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 8 ===================== -->
+<section class="slide" data-ex="8" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 8</h1>
+    <p class="question" style="color:var(--ink)">Sea \(X_1, X_2, \dots\) una sucesión de variables independientes con \(X_n \sim \D{ber}{\text{Ber}(p)}\). Sea \(\D{Yn}{Y_n = \frac1n \sum_{i=1}^n X_i}\). Muestre que</p>
+    <div class="formula">\[\D{cd}{\frac{\sqrt n\,(Y_n - p)}{\sqrt{p(1-p)}} \xrightarrow{d} \D{N01}{N(0,1)}}\]</div>
+    <p class="note" data-b><b>Qué es \(Y_n\).</b> Cada \(X_i\) vale \(1\) (éxito) o \(0\) (fracaso). Entonces \(Y_n\) es la proporción de éxitos: es la media muestral \(\bar X_n\).</p>
+    <p class="note" data-b><b>Idea.</b> Es exactamente el teorema del límite central aplicado a variables de Bernoulli. Solo hay que revisar las hipótesis y calcular \(\mu\) y \(\sigma^2\).</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="8" data-title="Aplicar el TLC">
+  <div class="inner">
+    <p class="eyebrow">Aplicar el teorema</p>
+    <h2 class="heading">Revisar las hipótesis del límite central</h2>
+    <div class="theorem">
+      <p class="theorem__title">Teorema del límite central</p>
+      <p>Si las \(X_i\) son independientes, idénticamente distribuidas, con media \(\mu\) y varianza \(\sigma^2 \lt \infty\):</p>
+      <div class="formula">\[\frac{\sqrt n\,(\bar X_n - \mu)}{\sigma} \xrightarrow{d} N(0,1)\]</div>
+    </div>
+    <ol class="items">
+      <li data-b>Independientes: lo dice el enunciado. Idénticamente distribuidas: todas son \(\text{Ber}(p)\).</li>
+      <li data-b>Media: \(\mu = E[X_i] = 1\cdot p + 0 \cdot (1-p) = p\).</li>
+      <li data-b>Varianza: \(E[X_i^2] = p\) (porque \(X_i^2 = X_i\)), así que \(\sigma^2 = p - p^2 = p(1-p) \lt \infty\).</li>
+    </ol>
+    <p class="note" data-b>Sustituyendo \(\bar X_n = Y_n\), \(\mu = p\) y \(\sigma = \sqrt{p(1-p)}\) en el teorema:</p>
+    <div class="formula formula--chart" data-b>\[\D{cd}{\frac{\sqrt n\,(Y_n - p)}{\sqrt{p(1-p)}} \xrightarrow{d} N(0,1)}\]</div>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 9 ===================== -->
+<section class="slide" data-ex="9" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 9</h1>
+    <p class="question" style="color:var(--ink)">Sea \(X_1, X_2, \dots\) una sucesión de variables independientes con densidad \(\D{f}{f(x) = \alpha x^{-\alpha-1}}\), \(x \gt 1\), \(\alpha \gt 0\). Sea \(\D{Yn}{Y_n = \dfrac{X_{(n)}}{n^{1/\alpha}}}\). Muestre que \(Y_n\) converge en distribución y halle el límite.</p>
+    <p class="note" data-b><b>Receta.</b> Como en los ejercicios 5 y 6: calcular \(P(Y_n \le y)\) y tomar el límite.</p>
+    <p class="note" data-b>Primero la función de distribución de una observación:</p>
+    <div class="formula" data-b>\[\D{F}{F(x)} = \int_1^x \alpha t^{-\alpha-1}\,dt = \Bigl[-t^{-\alpha}\Bigr]_1^x = 1 - x^{-\alpha}, \qquad x \gt 1\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="9" data-title="Distribución de Yn">
+  <div class="inner">
+    <p class="eyebrow">Paso 1</p>
+    <h2 class="heading">La función de distribución de \(Y_n\)</h2>
+    <p class="question">El máximo no pasa de un valor si ninguna observación pasa de él: \(P(X_{(n)} \le x) = F(x)^n\).</p>
+    <p class="note" data-b>Fijamos \(y \gt 0\). Para \(n\) grande, \(y\,n^{1/\alpha} \gt 1\) y podemos usar \(F\):</p>
+    <div class="formula" data-b>\[P(Y_n \le y) = P\bigl(X_{(n)} \le y\,n^{1/\alpha}\bigr) = \Bigl[1 - \bigl(y\,n^{1/\alpha}\bigr)^{-\alpha}\Bigr]^n\]</div>
+    <p class="note" data-b>Como \(\bigl(n^{1/\alpha}\bigr)^{-\alpha} = n^{-1} = \frac1n\):</p>
+    <div class="formula formula--chart" data-b>\[P(Y_n \le y) = \Bigl(1 - \frac{y^{-\alpha}}{n}\Bigr)^n\]</div>
+    <p class="note" data-b>Si \(y \le 0\), \(P(Y_n \le y) = 0\), porque \(Y_n \gt 0\).</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="9" data-title="El límite">
+  <div class="inner">
+    <p class="eyebrow">Paso 2</p>
+    <h2 class="heading">Tomar el límite</h2>
+    <div class="theorem">
+      <p class="theorem__title">Límite clave</p>
+      <div class="formula">\[\Bigl(1 + \frac{c}{n}\Bigr)^n \xrightarrow[n\to\infty]{} \D{e}{e}^{\,c}\]</div>
+    </div>
+    <p class="note" data-b>Con \(c = -y^{-\alpha}\):</p>
+    <div class="formula" data-b>\[\lim_{n\to\infty} P(Y_n \le y) = G(y) = \begin{cases} e^{-y^{-\alpha}}, & y \gt 0 \\ 0, & y \le 0 \end{cases}\]</div>
+    <p class="note" data-b>\(G\) es una función de distribución: crece de \(0\) (cuando \(y \to 0^+\)) a \(1\) (cuando \(y \to \infty\)) y es continua. Se llama distribución de <b>Fréchet</b>, con densidad \(\alpha y^{-\alpha-1} e^{-y^{-\alpha}}\).</p>
+    <div class="formula formula--chart" data-b>\[\D{cd}{\frac{X_{(n)}}{n^{1/\alpha}} \xrightarrow{d} Y}, \qquad P(Y \le y) = e^{-y^{-\alpha}},\ y \gt 0\]</div>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 10 ===================== -->
+<section class="slide" data-ex="10" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 10</h1>
+    <p class="question" style="color:var(--ink)">Sea \(X_1, X_2, \dots\) una sucesión de variables independientes con \(X_n \sim \D{bin}{\text{bin}\bigl(n, \tfrac{\lambda}{n}\bigr)}\), con \(\lambda\) constante. Muestre que \(\D{cd}{X_n \xrightarrow{d} \D{poi}{p(\lambda)}}\).</p>
+    <p class="note" data-b><b>Intuición.</b> Muchos ensayos (\(n\)), cada uno con probabilidad de éxito muy pequeña (\(\lambda/n\)), con un número esperado de éxitos fijo, \(n \cdot \lambda/n = \lambda\). Así se cuentan eventos raros.</p>
+    <div class="theorem" data-b>
+      <p class="theorem__title">Criterio para variables con valores enteros</p>
+      <p>Si \(X_n\) y \(X\) toman valores en \(\{0, 1, 2, \dots\}\) y \(P(X_n = k) \to P(X = k)\) para cada \(k\), entonces \(X_n \xrightarrow{d} X\).</p>
+    </div>
+    <p class="note" data-b>Hay que mostrar que la probabilidad binomial de cada \(k\) tiende a la de Poisson: \(\D{poi}{P(X = k) = e^{-\lambda}\dfrac{\lambda^k}{k!}}\).</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="10" data-title="Separar factores">
+  <div class="inner">
+    <p class="eyebrow">Paso 1</p>
+    <h2 class="heading">Separar la probabilidad binomial en factores</h2>
+    <p class="question">Fijamos \(k\) y escribimos \(P(X_n = k)\) con \(p = \lambda/n\):</p>
+    <div class="formula" data-b>\[P(X_n = k) = \binom{n}{k}\Bigl(\frac{\lambda}{n}\Bigr)^k\Bigl(1 - \frac{\lambda}{n}\Bigr)^{n-k}\]</div>
+    <p class="note" data-b>Usamos \(\binom nk = \frac{n(n-1)\cdots(n-k+1)}{k!}\) y reordenamos:</p>
+    <div class="formula" data-b>\[P(X_n = k) = \underbrace{\frac{n(n-1)\cdots(n-k+1)}{n^k}}_{\text{(a)}} \cdot \frac{\lambda^k}{k!} \cdot \underbrace{\Bigl(1 - \frac{\lambda}{n}\Bigr)^{n}}_{\text{(b)}} \cdot \underbrace{\Bigl(1 - \frac{\lambda}{n}\Bigr)^{-k}}_{\text{(c)}}\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="10" data-title="Límites">
+  <div class="inner">
+    <p class="eyebrow">Paso 2</p>
+    <h2 class="heading">El límite de cada factor</h2>
+    <ol class="items">
+      <li data-b><b>(a)</b> Son \(k\) factores \(\frac nn \cdot \frac{n-1}{n} \cdots \frac{n-k+1}{n}\), y cada uno tiende a \(1\). Como \(k\) está fijo, (a) \(\to 1\).</li>
+      <li data-b><b>(b)</b> Por el límite \(\bigl(1 + \frac cn\bigr)^n \to e^{c}\) con \(c = -\lambda\): (b) \(\to e^{-\lambda}\).</li>
+      <li data-b><b>(c)</b> \(1 - \frac\lambda n \to 1\), y un exponente fijo \(-k\) no cambia eso: (c) \(\to 1\).</li>
+    </ol>
+    <div class="formula" data-b>\[\lim_{n\to\infty} P(X_n = k) = 1 \cdot \frac{\lambda^k}{k!} \cdot e^{-\lambda} \cdot 1 = e^{-\lambda}\frac{\lambda^k}{k!}\]</div>
+    <p class="note" data-b>Esto vale para cada \(k = 0, 1, 2, \dots\). Por el criterio para variables enteras:</p>
+    <div class="formula formula--chart" data-b>\[\D{cd}{X_n \xrightarrow{d} \text{Poisson}(\lambda)}\]</div>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 11 ===================== -->
+<section class="slide" data-ex="11" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 11</h1>
+    <p class="question" style="color:var(--ink)">Sea \(X_1, \dots, X_n\) una muestra aleatoria de una \(\D{poi}{p(\lambda)}\) y \(\D{xbar}{\bar X_n}\) la media muestral. Muestre que</p>
+    <div class="formula">\[\D{cd}{\frac{\bar X_n - \lambda}{\sqrt{\bar X_n / n}} \xrightarrow{d} \D{N01}{N(0,1)}}\]</div>
+    <p class="note" data-b><b>Idea.</b> Si el denominador fuera \(\sqrt{\lambda/n}\), sería directamente el límite central (la Poisson tiene varianza \(\lambda\)). Pero aparece \(\bar X_n\) en lugar de \(\lambda\).</p>
+    <p class="note" data-b>El plan: escribir la expresión como (límite central) \(\times\) (algo que tiende a \(1\)), y usar el teorema de Slutsky.</p>
+    <ol class="items">
+      <li data-b>Límite central con \(\mu = \sigma^2 = \lambda\).</li>
+      <li data-b>Ley de los grandes números: \(\bar X_n \xrightarrow{p} \lambda\).</li>
+      <li data-b>Slutsky para juntar las dos piezas.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="slide" data-ex="11" data-title="Las dos piezas">
+  <div class="inner">
+    <p class="eyebrow">Pasos 1 y 2</p>
+    <h2 class="heading">Las dos piezas</h2>
+    <p class="question">Para la Poisson, \(E[X_i] = \lambda\) y \(\text{Var}(X_i) = \lambda\).</p>
+    <div class="theorem" data-b>
+      <p class="theorem__title">Pieza 1 · Teorema del límite central</p>
+      <div class="formula">\[A_n = \frac{\sqrt n\,(\bar X_n - \lambda)}{\sqrt\lambda} \xrightarrow{d} N(0,1)\]</div>
+    </div>
+    <div class="theorem" data-b>
+      <p class="theorem__title">Pieza 2 · Ley débil de los grandes números</p>
+      <p>\(\bar X_n \xrightarrow{p} \lambda\). Si \(g\) es continua en \(\lambda\), entonces \(g(\bar X_n) \xrightarrow{p} g(\lambda)\). Con \(g(x) = \sqrt{\lambda / x}\):</p>
+      <div class="formula">\[B_n = \sqrt{\frac{\lambda}{\bar X_n}} \xrightarrow{p} \sqrt{\frac{\lambda}{\lambda}} = 1\]</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-ex="11" data-title="Slutsky">
+  <div class="inner">
+    <p class="eyebrow">Paso 3</p>
+    <h2 class="heading">Juntar las piezas con Slutsky</h2>
+    <p class="question">La expresión del enunciado es exactamente \(A_n \cdot B_n\):</p>
+    <div class="formula" data-b>\[\frac{\bar X_n - \lambda}{\sqrt{\bar X_n / n}} = \frac{\sqrt n\,(\bar X_n - \lambda)}{\sqrt{\bar X_n}} = \underbrace{\frac{\sqrt n\,(\bar X_n - \lambda)}{\sqrt\lambda}}_{A_n} \cdot \underbrace{\sqrt{\frac{\lambda}{\bar X_n}}}_{B_n}\]</div>
+    <div class="theorem" data-b>
+      <p class="theorem__title">Teorema de Slutsky</p>
+      <p>Si \(A_n \xrightarrow{d} A\) y \(B_n \xrightarrow{p} c\) (una constante), entonces \(A_n B_n \xrightarrow{d} cA\).</p>
+    </div>
+    <div class="formula formula--chart" data-b>\[A_n B_n \xrightarrow{d} 1 \cdot N(0,1) = N(0,1)\]</div>
+    <p class="note" data-b>Detalle: \(\bar X_n = 0\) tiene probabilidad \(e^{-n\lambda} \to 0\), así que ese caso no afecta el límite.</p>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 12 ===================== -->
+<section class="slide" data-ex="12" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 12</h1>
+    <p class="question" style="color:var(--ink)">Considere el espacio de probabilidad \(([0,1], \mathcal B[0,1], P)\), con \(P\) la distribución uniforme en \([0,1]\). Sea \(\D{Xn}{X_n = I_{[0, 1/n]}(\cdot)}\). Muestre que \(\D{cas}{X_n \xrightarrow{a.s.} 0}\).</p>
+    <div class="recall" data-b>
+      <p class="recall__title">Recordatorio · Qué es cada cosa</p>
+      <p>Un resultado del experimento es un número \(\omega \in [0,1]\), escogido al azar. La probabilidad de un intervalo es su longitud.</p>
+      <p>\(X_n(\omega) = 1\) si \(\omega \in [0, 1/n]\), y \(X_n(\omega) = 0\) si no. Es una función indicadora.</p>
+    </div>
+    <div class="recall" data-b>
+      <p class="recall__title">Recordatorio · Convergencia casi segura</p>
+      <p>\(X_n \xrightarrow{a.s.} 0\) significa que el conjunto de los \(\omega\) donde la sucesión de números \(X_1(\omega), X_2(\omega), \dots\) tiende a \(0\) tiene probabilidad \(1\):</p>
+      <div class="formula">\[P\bigl(\{\omega : X_n(\omega) \to 0\}\bigr) = 1\]</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-ex="12" data-title="Fijar ω">
+  <div class="inner">
+    <p class="eyebrow">Paso 1</p>
+    <h2 class="heading">Fijamos un resultado \(\omega \gt 0\)</h2>
+    <p class="question">Con \(\omega\) fijo, \(X_1(\omega), X_2(\omega), \dots\) es una sucesión de números (ceros y unos). Miramos hacia dónde va.</p>
+    <p class="note" data-b><b>Ejemplo con \(\omega = 0.3\).</b> Los intervalos \([0,1], [0,\tfrac12], [0,\tfrac13]\) contienen a \(0.3\); desde \([0, \tfrac14]\) ya no:</p>
+    <div class="formula" data-b>\[X_1(0.3), X_2(0.3), X_3(0.3), X_4(0.3), \dots = 1,\ 1,\ 1,\ 0,\ 0,\ 0,\ \dots \;\to\; 0\]</div>
+    <p class="note" data-b><b>En general.</b> Si \(\omega \gt 0\), para todo \(n \gt 1/\omega\) se cumple \(1/n \lt \omega\), así que \(\omega \notin [0, 1/n]\) y \(X_n(\omega) = 0\).</p>
+    <div class="formula formula--chart" data-b>\[\omega \in (0, 1] \quad\Longrightarrow\quad X_n(\omega) = 0 \text{ para todo } n \gt 1/\omega \quad\Longrightarrow\quad X_n(\omega) \to 0\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="12" data-title="El punto 0">
+  <div class="inner">
+    <p class="eyebrow">Paso 2</p>
+    <h2 class="heading">El único punto problemático: \(\omega = 0\)</h2>
+    <p class="question">El \(0\) está en todos los intervalos \([0, 1/n]\), así que \(X_n(0) = 1\) para todo \(n\). Ahí la sucesión no tiende a \(0\).</p>
+    <p class="note" data-b>Pero un solo punto tiene longitud \(0\), y en este espacio la probabilidad es la longitud: \(P(\{0\}) = 0\).</p>
+    <div class="formula" data-b>\[\{\omega : X_n(\omega) \to 0\} = (0, 1]\]</div>
+    <div class="formula formula--chart" data-b>\[P\bigl(\{\omega : X_n(\omega) \to 0\}\bigr) = P\bigl((0,1]\bigr) = 1 - 0 = 1 \qquad\Longrightarrow\qquad \D{cas}{X_n \xrightarrow{a.s.} 0}\]</div>
+    <p class="note" data-b>"Casi segura" quiere decir justamente esto: la convergencia puede fallar, pero solo en un conjunto de probabilidad cero.</p>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 13 ===================== -->
+<section class="slide" data-ex="13" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 13</h1>
+    <p class="question" style="color:var(--ink)">Dos monedas no cargadas se lanzan \(n\) veces. Sea \(\D{Xn}{X_n}\) el número de lanzamientos (de los \(n\)) en que no sale ninguna cara. Encuentre el menor \(n\) tal que</p>
+    <div class="formula">\[\D{P}{P}\Bigl(0.2 \le \frac{X_n}{n} \le 0.3\Bigr) \ge 0.954 \quad\text{aproximadamente.}\]</div>
+    <p class="note" data-b><b>Un lanzamiento.</b> "No sale cara" en las dos monedas es sacar sello y sello: probabilidad \(\tfrac12 \cdot \tfrac12 = \tfrac14\).</p>
+    <p class="note" data-b>Los \(n\) lanzamientos son independientes, así que \(X_n\) cuenta éxitos con probabilidad \(\tfrac14\):</p>
+    <div class="formula formula--chart" data-b>\[X_n \sim \D{bin}{\text{bin}\bigl(n, \tfrac14\bigr)}\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="13" data-title="Aproximar">
+  <div class="inner">
+    <p class="eyebrow">Paso 1</p>
+    <h2 class="heading">Aproximación normal de la proporción</h2>
+    <p class="question">\(X_n/n\) es una proporción de éxitos (una media de Bernoullis), así que por el límite central es aproximadamente normal:</p>
+    <div class="formula" data-b>\[E\Bigl[\frac{X_n}{n}\Bigr] = \frac14, \qquad \text{Var}\Bigl(\frac{X_n}{n}\Bigr) = \frac{\frac14 \cdot \frac34}{n} = \frac{3}{16n}\]</div>
+    <p class="note" data-b>El intervalo \([0.2,\ 0.3]\) es \(0.25 \pm 0.05\): simétrico alrededor de la media. Estandarizando:</p>
+    <div class="formula" data-b>\[P\Bigl(0.2 \le \frac{X_n}{n} \le 0.3\Bigr) \approx P\bigl(|N(0,1)| \le c\bigr) = 2\,\D{Phi}{\Phi(c)} - 1, \qquad c = \frac{0.05}{\sqrt{3/(16n)}}\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="13" data-title="Despejar n">
+  <div class="inner">
+    <p class="eyebrow">Paso 2</p>
+    <h2 class="heading">Despejar \(n\)</h2>
+    <p class="question">Queremos \(2\Phi(c) - 1 \ge 0.954\), es decir \(\Phi(c) \ge 0.977\). La tabla normal da \(\Phi(2) \approx 0.977\), así que necesitamos \(c \ge 2\).</p>
+    <div class="formula" data-b>\[\frac{0.05\,\sqrt n}{\sqrt{3/16}} \ge 2 \quad\Longrightarrow\quad \sqrt n \ge \frac{2\sqrt{3/16}}{0.05} = \frac{2 \cdot 0.4330}{0.05} \approx 17.32\]</div>
+    <div class="formula" data-b>\[n \ge \Bigl(\frac{2\sqrt3/4}{0.05}\Bigr)^2 = \bigl(10\sqrt3\bigr)^2 = 300\]</div>
+    <div class="formula formula--chart" data-b>\[\text{El menor valor es}\quad n = 300\]</div>
+    <p class="note" data-b>El número \(0.954\) del enunciado es justamente \(P(|N(0,1)| \le 2)\): la regla de "dos desviaciones estándar".</p>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 14 ===================== -->
+<section class="slide" data-ex="14" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 14</h1>
+    <p class="question" style="color:var(--ink)">Sea \(X_1, \dots, X_{72}\) una muestra aleatoria con densidad \(\D{f}{f(x) = \dfrac{1}{x^2}}\), \(x \gt 1\). Calcule aproximadamente la probabilidad de que más de \(50\) ítems de la muestra sean superiores a \(3\).</p>
+    <p class="note" data-b><b>Idea.</b> Cada observación es un ensayo: "éxito" si pasa de \(3\). Contamos cuántos éxitos hay entre las \(72\).</p>
+    <div class="formula" data-b>\[\D{N}{N} = \text{número de } X_i \gt 3 \;\sim\; \D{bin}{\text{bin}(72, \D{p}{p})}\]</div>
+    <p class="note" data-b>La probabilidad de éxito sale de la densidad:</p>
+    <div class="formula" data-b>\[\D{p}{p} = P(X_i \gt 3) = \int_3^\infty \frac{1}{x^2}\,dx = \Bigl[-\frac1x\Bigr]_3^\infty = \frac13\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="14" data-title="Aproximar">
+  <div class="inner">
+    <p class="eyebrow">Aproximación normal</p>
+    <h2 class="heading">\(P(N \gt 50)\) con el límite central</h2>
+    <p class="question">\(N\) es una suma de \(72\) Bernoullis independientes, así que es aproximadamente normal:</p>
+    <div class="formula" data-b>\[E[N] = 72 \cdot \tfrac13 = 24, \qquad \text{Var}(N) = 72 \cdot \tfrac13 \cdot \tfrac23 = 16, \qquad \text{desviación} = 4\]</div>
+    <p class="note" data-b><b>Corrección por continuidad.</b> \(N\) solo toma valores enteros, y "más de \(50\)" es "\(51\) o más". Al pasar a la normal, cortamos en el punto medio, \(50.5\):</p>
+    <div class="formula" data-b>\[\D{P}{P}(N \gt 50) \approx P\Bigl(Z \gt \frac{50.5 - 24}{4}\Bigr) = 1 - \D{Phi}{\Phi(6.625)}\]</div>
+    <div class="formula formula--chart" data-b>\[\D{P}{P}(N \gt 50) \approx 2 \times 10^{-11} \approx 0\]</div>
+    <p class="note" data-b>Se esperan unos \(24\) valores por encima de \(3\). Que haya más de \(50\) está a más de \(6\) desviaciones de lo esperado: en la práctica, imposible.</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="14" data-title="Otra lectura">
+  <div class="inner">
+    <p class="eyebrow">Nota</p>
+    <h2 class="heading">Si el enunciado dijera "menores que 3"</h2>
+    <p class="question">Una versión conocida de este ejercicio (en el libro de Hogg, McKean y Craig) pregunta por observaciones "menores que \(3\)". Con esa lectura el procedimiento es idéntico, solo cambia \(p\):</p>
+    <div class="formula" data-b>\[p = P(X_i \lt 3) = 1 - \tfrac13 = \tfrac23, \qquad E[N] = 48, \qquad \text{Var}(N) = 72 \cdot \tfrac23 \cdot \tfrac13 = 16\]</div>
+    <div class="formula" data-b>\[P(N \gt 50) \approx 1 - \Phi\Bigl(\frac{50.5 - 48}{4}\Bigr) = 1 - \Phi(0.625) \approx 0.266\]</div>
+    <p class="note" data-b>Vale la pena confirmar con el profesor cuál de las dos versiones pide.</p>
+  </div>
+</section>

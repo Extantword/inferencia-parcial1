@@ -1,0 +1,440 @@
+<!-- ===================== Ejercicio 2 ===================== -->
+<section class="slide" data-ex="2" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 2</h1>
+    <p class="question" style="color:var(--ink)">Sea \(\D{Xi}{X_1, X_2, \dots, X_{10}}\) una muestra aleatoria de una distribución \(\D{unif}{\text{Uniforme}[0,\theta]}\), con \(\D{theta}{\theta} \gt 0\). Encuentre la distribución condicional de \(\D{xmax}{X_{(10)}}\) dado \(\D{xmin}{X_{(1)}}\).</p>
+    <p class="note" data-b><b>Qué se pide.</b> Si ya sabemos cuál es el mínimo de la muestra, ¿cómo se distribuye el máximo? La respuesta es una densidad en \(v\) que depende del valor \(u\) del mínimo.</p>
+    <p class="note" data-b><b>Idea.</b> Una densidad condicional es la densidad conjunta dividida entre la densidad de lo que ya sabemos:</p>
+    <ol class="items">
+      <li data-b>Densidad conjunta de \(X_{(1)}\) y \(X_{(10)}\).</li>
+      <li data-b>Densidad de \(X_{(1)}\) sola.</li>
+      <li data-b>Dividir la primera entre la segunda.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="slide" data-ex="2" data-title="Lo que necesitamos">
+  <div class="inner">
+    <p class="eyebrow">Antes de empezar</p>
+    <h2 class="heading">Dos herramientas</h2>
+    <div class="recall">
+      <p class="recall__title">Recordatorio · Uniforme en \([0,\theta]\)</p>
+      <p>Todos los valores entre \(0\) y \(\theta\) son igual de probables. Por eso la densidad es constante:</p>
+      <div class="formula">\[\D{f}{f(x)} = \frac{1}{\theta}, \qquad \D{F}{F(x)} = \frac{x}{\theta}, \qquad 0 \le x \le \theta\]</div>
+    </div>
+    <div class="recall" data-b>
+      <p class="recall__title">Recordatorio · Densidad condicional</p>
+      <p>Si \((U, V)\) tiene densidad conjunta \(f_{U,V}\), la densidad de \(V\) cuando ya sabemos que \(U = u\) es</p>
+      <div class="formula">\[\D{cond}{f_{V \mid U}(v \mid u)} = \frac{\D{fuv}{f_{U,V}(u,v)}}{\D{fu}{f_U(u)}}, \qquad \text{siempre que } f_U(u) \gt 0\]</div>
+    </div>
+    <p class="note" data-b>Aquí \(U = X_{(1)}\) (el mínimo, que conocemos) y \(V = X_{(10)}\) (el máximo, que queremos describir).</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="2" data-title="Conjunta">
+  <div class="inner">
+    <p class="eyebrow">Paso 1 · Densidad conjunta</p>
+    <h2 class="heading">Densidad conjunta de \(X_{(1)}\) y \(X_{(10)}\)</h2>
+    <div class="theorem">
+      <p class="theorem__title">Teorema 3</p>
+      <p>La p.d.f. conjunta de \(X_{(i)}\) y \(X_{(j)}\), con \(i \lt j\), es</p>
+      <div class="formula">\[\begin{aligned}\D{fuv}{f_{X_{(i)},X_{(j)}}(u,v)} &= \D{coef}{\frac{n!}{(i-1)!\,(j-i-1)!\,(n-j)!}}\,\D{f}{f(u)}\,\D{f}{f(v)} \\ &\quad\cdot\ \D{below}{[F(u)]^{i-1}}\,\D{between}{[F(v)-F(u)]^{j-i-1}}\,\D{above}{[1-F(v)]^{n-j}}\end{aligned}\]</div>
+      <p>para \(u \lt v\).</p>
+    </div>
+    <p class="note" data-b>Usamos \(i = 1\) (el mínimo), \(j = 10\) (el máximo) y \(n = 10\). Los exponentes quedan \(i - 1 = 0\), \(j - i - 1 = 8\), \(n - j = 0\):</p>
+    <div class="formula" data-b>\[\D{coef}{\frac{10!}{0!\,8!\,0!}} = 10 \cdot 9 = 90, \qquad \D{fuv}{f(u,v)} = 90 \cdot \frac1\theta \cdot \frac1\theta \cdot \Bigl(\frac{v}{\theta} - \frac{u}{\theta}\Bigr)^{8}\]</div>
+    <div class="formula formula--chart" data-b>\[\D{fuv}{f_{X_{(1)},X_{(10)}}(u,v)} = \frac{90\,(v-u)^8}{\theta^{10}}, \qquad 0 \lt u \lt v \lt \theta\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="2" data-title="Densidad del mínimo">
+  <div class="inner">
+    <p class="eyebrow">Paso 2 · Densidad del mínimo</p>
+    <h2 class="heading">Densidad de \(X_{(1)}\)</h2>
+    <div class="theorem">
+      <p class="theorem__title">Teorema · Densidad del \(k\)-ésimo estadístico de orden</p>
+      <div class="formula">\[\D{fk}{f_{X_{(k)}}(x)} = \D{coefk}{\frac{n!}{(k-1)!\,(n-k)!}}\,\D{f}{f(x)}\,\D{below}{[F(x)]^{k-1}}\,\D{above}{[1-F(x)]^{n-k}}\]</div>
+      <p>Se lee igual que el Teorema 3: \(k-1\) observaciones debajo de \(x\), una en \(x\), y \(n-k\) encima.</p>
+    </div>
+    <p class="note" data-b>Con \(k = 1\) y \(n = 10\): ninguna observación debajo del mínimo y \(9\) encima.</p>
+    <div class="formula" data-b>\[\D{fu}{f_{X_{(1)}}(u)} = \frac{10!}{0!\,9!} \cdot \frac1\theta \cdot \Bigl(1 - \frac u\theta\Bigr)^{9} = 10 \cdot \frac{1}{\theta} \cdot \frac{(\theta - u)^9}{\theta^9}\]</div>
+    <div class="formula formula--chart" data-b>\[\D{fu}{f_{X_{(1)}}(u)} = \frac{10\,(\theta-u)^9}{\theta^{10}}, \qquad 0 \lt u \lt \theta\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="2" data-title="Dividir">
+  <div class="inner">
+    <p class="eyebrow">Paso 3 · Dividir</p>
+    <h2 class="heading">La densidad condicional</h2>
+    <p class="question">Dividimos la conjunta entre la densidad del mínimo. El factor \(\theta^{10}\) se cancela:</p>
+    <div class="formula" data-b>\[\D{cond}{f(v \mid u)} = \frac{\D{fuv}{90\,(v-u)^8 / \theta^{10}}}{\D{fu}{10\,(\theta-u)^9 / \theta^{10}}} = \frac{90}{10}\cdot\frac{(v-u)^8}{(\theta-u)^9}\]</div>
+    <div class="formula formula--chart" data-b>\[\D{cond}{f_{X_{(10)} \mid X_{(1)}}(v \mid u)} = \frac{9\,(v-u)^8}{(\theta-u)^9}, \qquad u \lt v \lt \theta\]</div>
+    <p class="note" data-b><b>Comprobación.</b> Integra 1 en \(v\):</p>
+    <div class="formula" data-b>\[\int_u^\theta \frac{9\,(v-u)^8}{(\theta-u)^9}\,dv = \frac{(v-u)^9}{(\theta-u)^9}\Bigg|_{v=u}^{v=\theta} = 1\]</div>
+    <p class="note" data-b>La misma cuenta da la función de distribución condicional: \(P\bigl(X_{(10)} \le v \mid X_{(1)} = u\bigr) = \Bigl(\dfrac{v-u}{\theta-u}\Bigr)^{9}\).</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="2" data-title="Interpretación">
+  <div class="inner">
+    <p class="eyebrow">Para entenderlo</p>
+    <h2 class="heading">¿Por qué sale algo tan simple?</h2>
+    <p class="question">Si sabemos que el mínimo es \(u\), las otras \(9\) observaciones están en \((u, \theta)\) y siguen siendo uniformes ahí.</p>
+    <p class="note" data-b>El máximo de la muestra es el máximo de esas \(9\). Para que sea \(\le v\), las \(9\) deben caer en \((u, v)\), y cada una lo hace con probabilidad \(\frac{v-u}{\theta-u}\):</p>
+    <div class="formula" data-b>\[P\bigl(X_{(10)} \le v \mid X_{(1)} = u\bigr) = \Bigl(\frac{v-u}{\theta-u}\Bigr)^{9}\]</div>
+    <p class="note" data-b>Derivando respecto a \(v\) sale exactamente la densidad que encontramos. Las dos rutas coinciden.</p>
+    <div class="formula formula--chart" data-b>\[\text{Respuesta:}\quad f(v \mid u) = \frac{9\,(v-u)^8}{(\theta-u)^9}, \qquad u \lt v \lt \theta\]</div>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 3 ===================== -->
+<section class="slide" data-ex="3" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 3</h1>
+    <p class="question" style="color:var(--ink)">La duración en años de cierto componente es una variable aleatoria con p.d.f. \(\D{f}{f(t) = \tfrac25 e^{-\frac25 t}}\), \(t \gt 0\). Un sistema tiene \(3\) de estos componentes, que funcionan de manera independiente. Usando el estadístico de orden adecuado, calcule la probabilidad de que el sistema dure más de \(2\) años si los componentes están</p>
+    <ol class="items">
+      <li>en serie;</li>
+      <li>en paralelo.</li>
+    </ol>
+    <p class="note" data-b><b>Idea.</b> Primero hay que decidir qué estadístico de orden es la duración del sistema en cada caso. Después calculamos una probabilidad con él.</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="3" data-title="Una componente">
+  <div class="inner">
+    <p class="eyebrow">Antes de empezar</p>
+    <h2 class="heading">Una sola componente</h2>
+    <p class="question">Llamamos \(\D{T}{T_1, T_2, T_3}\) a las duraciones. Cada una tiene la densidad \(f(t) = \tfrac25 e^{-2t/5}\): es una exponencial.</p>
+    <p class="note" data-b>Su función de distribución se obtiene integrando la densidad desde \(0\):</p>
+    <div class="formula" data-b>\[\D{F}{F(t)} = \int_0^t \tfrac25 e^{-2s/5}\,ds = \Bigl[-e^{-2s/5}\Bigr]_0^t = 1 - e^{-2t/5}\]</div>
+    <p class="note" data-b>La probabilidad de que una componente dure más de \(t\) años es lo que le falta a \(F\) para llegar a 1:</p>
+    <div class="formula" data-b>\[\D{S}{P(T_i \gt t)} = 1 - F(t) = e^{-2t/5}, \qquad P(T_i \gt 2) = e^{-4/5} \approx 0.4493\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="3" data-title="Serie y paralelo">
+  <div class="inner">
+    <p class="eyebrow">El paso clave</p>
+    <h2 class="heading">¿Qué estadístico de orden es la duración del sistema?</h2>
+    <div class="two-col">
+      <div class="recall" data-b>
+        <p class="recall__title">En serie</p>
+        <p>El sistema funciona solo si <b>todas</b> las componentes funcionan. Falla en cuanto falla la primera.</p>
+        <div class="formula">\[\text{duración} = \D{xmin}{T_{(1)}} = \min(T_1, T_2, T_3)\]</div>
+      </div>
+      <div class="recall" data-b>
+        <p class="recall__title">En paralelo</p>
+        <p>El sistema funciona mientras <b>al menos una</b> componente funcione. Falla cuando falla la última.</p>
+        <div class="formula">\[\text{duración} = \D{xmax}{T_{(3)}} = \max(T_1, T_2, T_3)\]</div>
+      </div>
+    </div>
+    <p class="note" data-b>Ahora usamos la densidad del \(k\)-ésimo estadístico de orden con \(n = 3\): \(k = 1\) para serie y \(k = 3\) para paralelo.</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="3" data-title="En serie">
+  <div class="inner">
+    <p class="eyebrow">Caso 1 · En serie</p>
+    <h2 class="heading">Densidad del mínimo \(T_{(1)}\)</h2>
+    <div class="theorem">
+      <p class="theorem__title">Teorema · Densidad del \(k\)-ésimo estadístico de orden</p>
+      <div class="formula">\[\D{fk}{f_{X_{(k)}}(x)} = \D{coefk}{\frac{n!}{(k-1)!\,(n-k)!}}\,\D{f}{f(x)}\,\D{below}{[F(x)]^{k-1}}\,\D{above}{[1-F(x)]^{n-k}}\]</div>
+    </div>
+    <p class="note" data-b>Con \(k = 1\), \(n = 3\): el coeficiente es \(\frac{3!}{0!\,2!} = 3\).</p>
+    <div class="formula" data-b>\[\D{fk}{f_{T_{(1)}}(t)} = 3 \cdot \tfrac25 e^{-2t/5} \cdot \bigl(e^{-2t/5}\bigr)^2 = \tfrac65\, e^{-6t/5}, \qquad t \gt 0\]</div>
+    <div class="formula" data-b>\[\D{P}{P}\bigl(T_{(1)} \gt 2\bigr) = \int_2^\infty \tfrac65 e^{-6t/5}\,dt = \Bigl[-e^{-6t/5}\Bigr]_2^\infty = e^{-12/5}\]</div>
+    <div class="formula formula--chart" data-b>\[\D{P}{P}(\text{sistema en serie dure más de 2 años}) = e^{-12/5} \approx 0.0907\]</div>
+    <p class="note" data-b>Tiene sentido: es \(P(\text{las tres duran} \gt 2) = (e^{-4/5})^3\).</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="3" data-title="En paralelo">
+  <div class="inner">
+    <p class="eyebrow">Caso 2 · En paralelo</p>
+    <h2 class="heading">Densidad del máximo \(T_{(3)}\)</h2>
+    <p class="question">Con \(k = 3\), \(n = 3\): el coeficiente es \(\frac{3!}{2!\,0!} = 3\), dos componentes fallan antes y ninguna después.</p>
+    <div class="formula" data-b>\[\D{fk}{f_{T_{(3)}}(t)} = 3\,\D{f}{f(t)}\,\D{below}{[F(t)]^{2}} = 3 \cdot \tfrac25 e^{-2t/5}\,\bigl(1 - e^{-2t/5}\bigr)^2, \qquad t \gt 0\]</div>
+    <p class="note" data-b>Es más fácil calcular lo contrario, que dure <b>como mucho</b> \(2\) años. Como \(3F(t)^2 f(t)\) es la derivada de \(F(t)^3\):</p>
+    <div class="formula" data-b>\[P\bigl(T_{(3)} \le 2\bigr) = \int_0^2 3\,F(t)^2 f(t)\,dt = \Bigl[F(t)^3\Bigr]_0^2 = \bigl(1 - e^{-4/5}\bigr)^3 \approx 0.1670\]</div>
+    <div class="formula formula--chart" data-b>\[\D{P}{P}(\text{sistema en paralelo dure más de 2 años}) = 1 - \bigl(1 - e^{-4/5}\bigr)^3 \approx 0.8330\]</div>
+    <p class="note" data-b>Tiene sentido: el sistema solo falla antes de 2 años si fallan las tres, y eso tiene probabilidad \((1 - e^{-4/5})^3\).</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="3" data-title="Resumen">
+  <div class="inner">
+    <h2 class="heading">Resumen</h2>
+    <ol class="items">
+      <li data-b>Cada componente: \(F(t) = 1 - e^{-2t/5}\) y \(P(T_i \gt 2) = e^{-4/5} \approx 0.4493\).</li>
+      <li data-b>En serie la duración es el mínimo \(T_{(1)}\); en paralelo es el máximo \(T_{(3)}\).</li>
+      <li data-b class="result-line">En serie: \(P(T_{(1)} \gt 2) = e^{-12/5} \approx 0.0907\).</li>
+      <li data-b class="result-line">En paralelo: \(P(T_{(3)} \gt 2) = 1 - (1 - e^{-4/5})^3 \approx 0.8330\).</li>
+    </ol>
+    <p class="note" data-b>Poner componentes en paralelo hace el sistema mucho más duradero; ponerlos en serie lo hace más frágil que una sola componente.</p>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 4 ===================== -->
+<section class="slide" data-ex="4" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 4</h1>
+    <p class="question" style="color:var(--ink)">Sea \(\D{Xi}{X_1, X_2, \dots, X_n}\), con \(n \gt 10\), una muestra aleatoria de una distribución \(\D{N01}{n(0,1)}\). Calcule \(\D{P}{P}\bigl(\D{xk}{X_{(5)}} \lt 2.5\bigr)\).</p>
+    <p class="note" data-b><b>Idea.</b> No hace falta integrar ninguna densidad. Basta con <b>contar</b>:</p>
+    <div class="formula" data-b>\[X_{(5)} \lt 2.5 \quad\Longleftrightarrow\quad \text{al menos } 5 \text{ observaciones son menores que } 2.5\]</div>
+    <p class="note" data-b>¿Por qué? El quinto valor más pequeño está por debajo de \(2.5\) exactamente cuando los cinco más pequeños lo están.</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="4" data-title="Contar con la binomial">
+  <div class="inner">
+    <p class="eyebrow">Antes de empezar</p>
+    <h2 class="heading">Contar éxitos: la binomial</h2>
+    <div class="recall">
+      <p class="recall__title">Recordatorio · Distribución binomial</p>
+      <p>Si hacemos \(n\) ensayos independientes y cada uno es un "éxito" con probabilidad \(p\), el número de éxitos \(N\) cumple</p>
+      <div class="formula">\[P(N = m) = \D{binom}{\binom{n}{m}}\,p^m\,(1-p)^{n-m}, \qquad m = 0, 1, \dots, n\]</div>
+    </div>
+    <div class="theorem" data-b>
+      <p class="theorem__title">Teorema · Distribución del \(k\)-ésimo estadístico de orden</p>
+      <p>Tomando como "éxito" que una observación sea \(\le x\), con probabilidad \(F(x)\):</p>
+      <div class="formula">\[\D{Fk}{P\bigl(X_{(k)} \le x\bigr)} = \sum_{m=k}^{n} \D{binom}{\binom{n}{m}}\,\D{F}{F(x)}^{m}\,\bigl[1 - F(x)\bigr]^{n-m}\]</div>
+    </div>
+    <p class="note" data-b>Para la normal, \(P(X_{(5)} \lt 2.5)\) y \(P(X_{(5)} \le 2.5)\) son iguales: un punto no tiene probabilidad.</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="4" data-title="Calcular">
+  <div class="inner">
+    <p class="eyebrow">El cálculo</p>
+    <h2 class="heading">Probabilidad de un éxito y la suma</h2>
+    <p class="question">Para una sola observación normal estándar, la tabla da</p>
+    <div class="formula" data-b>\[\D{p}{p} = P(X_i \lt 2.5) = \D{Phi}{\Phi(2.5)} \approx 0.9938, \qquad 1 - p \approx 0.0062\]</div>
+    <p class="note" data-b>Con \(k = 5\) en el teorema:</p>
+    <div class="formula" data-b>\[\D{P}{P}\bigl(X_{(5)} \lt 2.5\bigr) = \sum_{m=5}^{n} \D{binom}{\binom{n}{m}}\,(0.9938)^{m}\,(0.0062)^{n-m}\]</div>
+    <p class="note" data-b>Es más cómodo restar de 1 los casos con menos de 5 éxitos (solo 5 términos):</p>
+    <div class="formula formula--chart" data-b>\[\D{P}{P}\bigl(X_{(5)} \lt 2.5\bigr) = 1 - \sum_{m=0}^{4} \D{binom}{\binom{n}{m}}\,\Phi(2.5)^{m}\,\bigl[1 - \Phi(2.5)\bigr]^{n-m}\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="4" data-title="¿Cuánto da?">
+  <div class="inner">
+    <p class="eyebrow">Para entenderlo</p>
+    <h2 class="heading">¿Cuánto da en la práctica?</h2>
+    <p class="question">El resultado depende de \(n\), pero para cualquier \(n \gt 10\) es casi exactamente \(1\).</p>
+    <p class="note" data-b>Para que \(X_{(5)} \ge 2.5\), al menos \(n - 4\) observaciones tendrían que pasar de \(2.5\). Con \(n = 11\) eso son \(7\) observaciones, y cada una lo hace solo con probabilidad \(0.0062\).</p>
+    <div class="formula" data-b>\[n = 11:\qquad \sum_{m=0}^{4} \binom{11}{m}\,(0.9938)^{m}\,(0.0062)^{11-m} \approx 1.1 \times 10^{-13}\]</div>
+    <div class="formula formula--chart" data-b>\[\D{P}{P}\bigl(X_{(5)} \lt 2.5\bigr) \approx 1 \quad \text{para todo } n \gt 10\]</div>
+    <p class="note" data-b>Y al crecer \(n\) la resta es todavía más pequeña, porque hacen falta aún más observaciones por encima de \(2.5\).</p>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 5 ===================== -->
+<section class="slide" data-ex="5" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 5</h1>
+    <p class="question" style="color:var(--ink)">Sea \(\D{Xi}{X_1, X_2, \dots, X_9}\) una muestra aleatoria de una distribución \(\text{Uniforme}[0,1]\). Si \(\D{me}{M_e}\) es la mediana de la muestra, calcule \(\D{P}{P}(\D{me}{M_e} \lt 0.45)\).</p>
+    <p class="note" data-b><b>¿Qué es la mediana?</b> Es el valor del medio cuando ordenamos la muestra. Con \(9\) observaciones, el del medio es el quinto: hay \(4\) por debajo y \(4\) por encima.</p>
+    <div class="formula" data-b>\[\D{me}{M_e} = \D{xk}{X_{(5)}}\]</div>
+    <p class="note" data-b>Lo resolvemos de dos formas: integrando la densidad de \(X_{(5)}\), y contando como en el ejercicio 4. Deben dar lo mismo.</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="5" data-title="Con la densidad">
+  <div class="inner">
+    <p class="eyebrow">Forma 1 · Con la densidad</p>
+    <h2 class="heading">Densidad de \(X_{(5)}\)</h2>
+    <div class="theorem">
+      <p class="theorem__title">Teorema · Densidad del \(k\)-ésimo estadístico de orden</p>
+      <div class="formula">\[\D{fk}{f_{X_{(k)}}(x)} = \D{coefk}{\frac{n!}{(k-1)!\,(n-k)!}}\,\D{f}{f(x)}\,\D{below}{[F(x)]^{k-1}}\,\D{above}{[1-F(x)]^{n-k}}\]</div>
+    </div>
+    <p class="note" data-b>Con \(k = 5\), \(n = 9\), \(f(x) = 1\) y \(F(x) = x\):</p>
+    <div class="formula" data-b>\[\D{coefk}{\frac{9!}{4!\,4!}} = 630, \qquad \D{fk}{f_{M_e}(x)} = 630\,x^4\,(1-x)^4, \qquad 0 \lt x \lt 1\]</div>
+    <p class="note" data-b>Desarrollamos \((1-x)^4 = 1 - 4x + 6x^2 - 4x^3 + x^4\) e integramos término a término:</p>
+    <div class="formula" data-b>\[P(M_e \lt 0.45) = 630\int_0^{0.45} \bigl(x^4 - 4x^5 + 6x^6 - 4x^7 + x^8\bigr)\,dx = 630\Bigl[\tfrac{x^5}{5} - \tfrac{2x^6}{3} + \tfrac{6x^7}{7} - \tfrac{x^8}{2} + \tfrac{x^9}{9}\Bigr]_0^{0.45}\]</div>
+    <div class="formula formula--chart" data-b>\[\D{P}{P}(M_e \lt 0.45) \approx 0.3786\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="5" data-title="Contando">
+  <div class="inner">
+    <p class="eyebrow">Forma 2 · Contando</p>
+    <h2 class="heading">Al menos 5 de 9 por debajo de 0.45</h2>
+    <p class="question">\(M_e \lt 0.45\) ocurre cuando al menos \(5\) de las \(9\) observaciones son menores que \(0.45\). Cada una lo es con probabilidad \(\D{p}{p} = F(0.45) = 0.45\).</p>
+    <div class="formula" data-b>\[\D{P}{P}(M_e \lt 0.45) = \sum_{m=5}^{9} \D{binom}{\binom{9}{m}}\,(0.45)^m\,(0.55)^{9-m}\]</div>
+    <div class="formula" data-b>\[= \underbrace{0.2128}_{m=5} + \underbrace{0.1160}_{m=6} + \underbrace{0.0407}_{m=7} + \underbrace{0.0083}_{m=8} + \underbrace{0.0008}_{m=9}\]</div>
+    <div class="formula formula--chart" data-b>\[\D{P}{P}(M_e \lt 0.45) \approx 0.3786\]</div>
+    <p class="note" data-b>Las dos formas coinciden. Es menor que \(\tfrac12\) porque \(0.45\) está un poco por debajo de \(0.5\), la mediana de la uniforme.</p>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 6 ===================== -->
+<section class="slide" data-ex="6" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 6</h1>
+    <p class="question" style="color:var(--ink)">Sea \(\D{Xi}{X_1, X_2, \dots, X_n}\) una muestra aleatoria de una población con densidad \(\D{f}{f(x \mid \theta) = e^{-(x-\theta)}}\), \(x \gt \D{theta}{\theta}\). Calcule \(\D{P}{P}\bigl(\D{xmin}{X_{(1)}} \lt \tfrac43\theta\bigr)\).</p>
+    <p class="note" data-b><b>La distribución.</b> Es una exponencial "corrida" a la derecha: empieza en \(\theta\) en lugar de en \(0\). Ninguna observación puede ser menor que \(\theta\).</p>
+    <p class="note" data-b><b>Idea.</b> Para el mínimo hay un truco: el mínimo es mayor que \(x\) exactamente cuando <b>todas</b> las observaciones son mayores que \(x\).</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="6" data-title="Una observación">
+  <div class="inner">
+    <p class="eyebrow">Paso 1 · Una observación</p>
+    <h2 class="heading">Probabilidad de que una observación pase de \(x\)</h2>
+    <p class="question">Integramos la densidad desde donde empieza, \(\theta\):</p>
+    <div class="formula" data-b>\[\D{F}{F(x)} = \int_\theta^x e^{-(t-\theta)}\,dt = \Bigl[-e^{-(t-\theta)}\Bigr]_\theta^x = 1 - e^{-(x-\theta)}, \qquad x \gt \theta\]</div>
+    <div class="formula formula--chart" data-b>\[\D{S}{P(X_i \gt x)} = 1 - F(x) = e^{-(x-\theta)}\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="6" data-title="El mínimo">
+  <div class="inner">
+    <p class="eyebrow">Paso 2 · El mínimo</p>
+    <h2 class="heading">Distribución del mínimo</h2>
+    <div class="theorem">
+      <p class="theorem__title">Teorema · Distribución del mínimo</p>
+      <div class="formula">\[P\bigl(\D{xmin}{X_{(1)}} \gt x\bigr) = P(X_1 \gt x, \dots, X_n \gt x) = \bigl[1 - F(x)\bigr]^n\]</div>
+      <p>La segunda igualdad usa que las observaciones son independientes: la probabilidad de que todas pasen de \(x\) es el producto.</p>
+    </div>
+    <div class="formula" data-b>\[P\bigl(X_{(1)} \gt x\bigr) = \bigl[e^{-(x-\theta)}\bigr]^n = e^{-n(x-\theta)}, \qquad x \gt \theta\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="6" data-title="Evaluar">
+  <div class="inner">
+    <p class="eyebrow">Paso 3 · Evaluar en \(\tfrac43\theta\)</p>
+    <h2 class="heading">La respuesta</h2>
+    <p class="question">Con \(x = \tfrac43\theta\) tenemos \(x - \theta = \tfrac13\theta\). Restamos de 1 para pasar de "\(\gt\)" a "\(\lt\)":</p>
+    <div class="formula" data-b>\[P\bigl(X_{(1)} \lt \tfrac43\theta\bigr) = 1 - P\bigl(X_{(1)} \gt \tfrac43\theta\bigr) = 1 - e^{-n\theta/3}\]</div>
+    <div class="formula formula--chart" data-b>\[\D{P}{P}\bigl(X_{(1)} \lt \tfrac43\theta\bigr) = 1 - e^{-n\theta/3}, \qquad \theta \gt 0\]</div>
+    <p class="note" data-b><b>Ojo con el signo de \(\theta\).</b> La fórmula necesita \(\tfrac43\theta \gt \theta\), es decir \(\theta \gt 0\). Si \(\theta \le 0\), entonces \(\tfrac43\theta \le \theta\) y la probabilidad es \(0\), porque ninguna observación es menor que \(\theta\).</p>
+    <p class="note" data-b>Al crecer \(n\) la probabilidad tiende a \(1\): con más datos, el mínimo queda cada vez más pegado a \(\theta\).</p>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 7 ===================== -->
+<section class="slide" data-ex="7" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 7</h1>
+    <p class="question" style="color:var(--ink)">Sea \(\D{Xi}{X_1, \dots, X_n}\) una muestra aleatoria de una \(\text{exp}(\D{theta}{\theta})\), con \(\D{n}{n} = 2k + 1\). Sea \(\D{me}{M_e}\) la mediana de la muestra.</p>
+    <ol class="items" style="margin-top:.6em">
+      <li>Halle la p.d.f. de \(M_e\).</li>
+      <li>Encuentre una expresión para \(P\bigl(M_e \lt \tfrac{3}{2\theta}\bigr)\).</li>
+      <li>Si \(k = 2\), calcule de manera exacta la probabilidad del literal b).</li>
+    </ol>
+    <p class="note" data-b><b>La exponencial.</b> Usamos \(f(x) = \theta e^{-\theta x}\) para \(x \gt 0\), con media \(1/\theta\). Así \(\tfrac{3}{2\theta}\) es \(1.5\) veces la media.</p>
+    <div class="formula" data-b>\[\D{f}{f(x) = \theta e^{-\theta x}}, \qquad \D{F}{F(x) = 1 - e^{-\theta x}}, \qquad \D{S}{1 - F(x) = e^{-\theta x}}\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="7" data-title="a) Densidad">
+  <div class="inner">
+    <p class="eyebrow">Literal a)</p>
+    <h2 class="heading">La densidad de la mediana</h2>
+    <p class="question">Con \(n = 2k + 1\) observaciones, la del medio es la \((k+1)\)-ésima: quedan \(k\) debajo y \(k\) encima. Entonces \(M_e = X_{(k+1)}\).</p>
+    <div class="theorem" data-b>
+      <p class="theorem__title">Teorema · Densidad del \(k\)-ésimo estadístico de orden</p>
+      <div class="formula">\[\D{fk}{f_{X_{(r)}}(x)} = \D{coefk}{\frac{n!}{(r-1)!\,(n-r)!}}\,\D{f}{f(x)}\,\D{below}{[F(x)]^{r-1}}\,\D{above}{[1-F(x)]^{n-r}}\]</div>
+      <p>(Escribimos la posición como \(r\) para no confundirla con el \(k\) del enunciado.)</p>
+    </div>
+    <p class="note" data-b>Con \(r = k + 1\) y \(n = 2k + 1\): \(r - 1 = k\) y \(n - r = k\).</p>
+    <div class="formula formula--chart" data-b>\[\D{fk}{f_{M_e}(x)} = \frac{(2k+1)!}{k!\,k!}\;\theta e^{-\theta x}\,\bigl(1 - e^{-\theta x}\bigr)^{k}\,\bigl(e^{-\theta x}\bigr)^{k}, \qquad x \gt 0\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="7" data-title="b) Expresión">
+  <div class="inner">
+    <p class="eyebrow">Literal b)</p>
+    <h2 class="heading">Una expresión para \(P\bigl(M_e \lt \tfrac{3}{2\theta}\bigr)\)</h2>
+    <p class="question">Integramos la densidad de \(0\) a \(\tfrac{3}{2\theta}\) con el cambio \(y = 1 - e^{-\theta x}\), que convierte \(F(x)\) en la nueva variable.</p>
+    <div class="formula" data-b>\[y = 1 - e^{-\theta x}, \qquad dy = \theta e^{-\theta x}\,dx, \qquad e^{-\theta x} = 1 - y\]</div>
+    <p class="note" data-b>Los límites: \(x = 0 \Rightarrow y = 0\), y \(x = \tfrac{3}{2\theta} \Rightarrow y = 1 - e^{-3/2}\). Llamamos \(\D{p}{p} = 1 - e^{-3/2} \approx 0.7769\).</p>
+    <div class="formula formula--chart" data-b>\[\D{P}{P}\bigl(M_e \lt \tfrac{3}{2\theta}\bigr) = \frac{(2k+1)!}{k!\,k!}\int_0^{p} y^{k}(1-y)^{k}\,dy, \qquad p = 1 - e^{-3/2}\]</div>
+    <p class="note" data-b>Otra forma, contando: al menos \(k+1\) de las \(2k+1\) observaciones deben ser menores que \(\tfrac{3}{2\theta}\), y cada una lo es con probabilidad \(p\):</p>
+    <div class="formula" data-b>\[\D{P}{P}\bigl(M_e \lt \tfrac{3}{2\theta}\bigr) = \sum_{m=k+1}^{2k+1} \D{binom}{\binom{2k+1}{m}}\,p^m\,(1-p)^{2k+1-m}\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="7" data-title="c) k = 2">
+  <div class="inner">
+    <p class="eyebrow">Literal c)</p>
+    <h2 class="heading">El caso \(k = 2\) (muestra de 5)</h2>
+    <p class="question">El coeficiente es \(\frac{5!}{2!\,2!} = 30\). Desarrollamos \(y^2(1-y)^2 = y^2 - 2y^3 + y^4\):</p>
+    <div class="formula" data-b>\[30\int_0^{p} \bigl(y^2 - 2y^3 + y^4\bigr)\,dy = 30\Bigl(\frac{p^3}{3} - \frac{p^4}{2} + \frac{p^5}{5}\Bigr) = 10p^3 - 15p^4 + 6p^5\]</div>
+    <p class="note" data-b>Con \(p = 1 - e^{-3/2} \approx 0.7769\):</p>
+    <div class="formula formula--chart" data-b>\[\D{P}{P}\bigl(M_e \lt \tfrac{3}{2\theta}\bigr) = 10p^3 - 15p^4 + 6p^5 \approx 0.9228\]</div>
+    <p class="note" data-b>La suma binomial da lo mismo: \(\binom53 p^3(1-p)^2 + \binom54 p^4(1-p) + p^5 \approx 0.9228\). El resultado no depende de \(\theta\).</p>
+  </div>
+</section>
+
+<!-- ===================== Ejercicio 8 ===================== -->
+<section class="slide" data-ex="8" data-title="Enunciado">
+  <div class="inner">
+    <h1 class="heading" style="font-size:clamp(32px,3.6vw,62px)">Ejercicio 8</h1>
+    <p class="question" style="color:var(--ink)">Sean \(X_{(1)}, X_{(2)}, X_{(3)}\) los estadísticos de orden de una muestra aleatoria de tamaño \(n = 3\) de una variable con densidad \(\D{f}{f(x) = 1}\), \(0 \lt x \lt 1\). Sea \(\D{Z}{Z = \frac{X_{(1)} + X_{(3)}}{2}}\). Halle la p.d.f. de \(Z\).</p>
+    <p class="note" data-b><b>Qué es \(Z\).</b> El punto medio entre el mínimo y el máximo de la muestra.</p>
+    <p class="note" data-b><b>Idea.</b> Es el mismo camino del ejercicio 1:</p>
+    <ol class="items">
+      <li data-b>Densidad conjunta de \(X_{(1)}\) y \(X_{(3)}\) (Teorema 3).</li>
+      <li data-b>Cambio de variable para que aparezca \(Z\).</li>
+      <li data-b>Encontrar la nueva región.</li>
+      <li data-b>Integrar la otra variable.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="slide" data-ex="8" data-title="Conjunta">
+  <div class="inner">
+    <p class="eyebrow">Paso 1 · Densidad conjunta</p>
+    <h2 class="heading">Densidad conjunta de \(X_{(1)}\) y \(X_{(3)}\)</h2>
+    <div class="theorem">
+      <p class="theorem__title">Teorema 3</p>
+      <div class="formula">\[\begin{aligned}\D{fuv}{f_{X_{(i)},X_{(j)}}(u,v)} &= \D{coef}{\frac{n!}{(i-1)!\,(j-i-1)!\,(n-j)!}}\,\D{f}{f(u)}\,\D{f}{f(v)} \\ &\quad\cdot\ \D{below}{[F(u)]^{i-1}}\,\D{between}{[F(v)-F(u)]^{j-i-1}}\,\D{above}{[1-F(v)]^{n-j}}\end{aligned}\]</div>
+    </div>
+    <p class="note" data-b>Con \(i = 1\), \(j = 3\), \(n = 3\), \(f = 1\) y \(F(x) = x\). Hay una observación entre el mínimo y el máximo:</p>
+    <div class="formula" data-b>\[\D{coef}{\frac{3!}{0!\,1!\,0!}} = 6, \qquad \D{fuv}{f(u,v)} = 6 \cdot 1 \cdot 1 \cdot \D{between}{(v - u)^{1}}\]</div>
+    <div class="formula formula--chart" data-b>\[\D{fuv}{f_{X_{(1)},X_{(3)}}(u,v)} = 6\,(v - u), \qquad 0 \lt u \lt v \lt 1\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="8" data-title="Cambio de variable">
+  <div class="inner">
+    <p class="eyebrow">Paso 2 · Hacer aparecer Z</p>
+    <h2 class="heading">Cambio de variable</h2>
+    <div class="theorem">
+      <p class="theorem__title">Teorema (cambio de variable)</p>
+      <p>Si \((W,Z) = g(U,V)\) con \(g\) biyectiva y la inversa \(u = h_1(w,z)\), \(v = h_2(w,z)\) tiene derivadas continuas, entonces</p>
+      <div class="formula">\[f_{W,Z}(w,z) = f_{U,V}\bigl(h_1(w,z),\,h_2(w,z)\bigr)\,\D{J}{|J|}\]</div>
+    </div>
+    <p class="note" data-b>Usamos \(Z\) (el punto medio) y \(R = V - U\) (el rango). Despejamos:</p>
+    <div class="formula" data-b>\[\D{Z}{Z} = \frac{U + V}{2}, \quad \D{R}{R} = V - U \qquad\Longrightarrow\qquad u = z - \frac r2, \quad v = z + \frac r2\]</div>
+    <div class="formula" data-b>\[\D{J}{J} = \det\begin{pmatrix} \partial u/\partial z & \partial u/\partial r \\ \partial v/\partial z & \partial v/\partial r \end{pmatrix} = \det\begin{pmatrix} 1 & -\tfrac12 \\ 1 & \tfrac12 \end{pmatrix} = \tfrac12 + \tfrac12 = 1\]</div>
+    <div class="formula formula--chart" data-b>\[f_{Z,R}(z,r) = 6\,(v - u) \cdot 1 = 6r\]</div>
+  </div>
+</section>
+
+<section class="slide" data-ex="8" data-title="La región">
+  <div class="inner">
+    <p class="eyebrow">Paso 3 · La nueva región</p>
+    <h2 class="heading">¿Dónde vive \((Z, R)\)?</h2>
+    <p class="question">La condición \(0 \lt u \lt v \lt 1\) son tres desigualdades. En cada una sustituimos \(u = z - \frac r2\) y \(v = z + \frac r2\):</p>
+    <div class="formula" data-b>\[0 \lt u \quad\Longrightarrow\quad 0 \lt z - \tfrac r2 \quad\Longrightarrow\quad r \lt 2z\]</div>
+    <div class="formula" data-b>\[u \lt v \quad\Longrightarrow\quad z - \tfrac r2 \lt z + \tfrac r2 \quad\Longrightarrow\quad r \gt 0\]</div>
+    <div class="formula" data-b>\[v \lt 1 \quad\Longrightarrow\quad z + \tfrac r2 \lt 1 \quad\Longrightarrow\quad r \lt 2(1 - z)\]</div>
+    <p class="note" data-b>Las dos cotas superiores se juntan en una: \(r\) tiene que ser menor que la más pequeña de las dos.</p>
+    <div class="formula formula--chart" data-b>\[0 \lt r \lt 2\min(z,\ 1 - z), \qquad 0 \lt z \lt 1\]</div>
+    <p class="note" data-b>Si \(z \le \tfrac12\), el mínimo es \(z\); si \(z \gt \tfrac12\), el mínimo es \(1 - z\).</p>
+  </div>
+</section>
+
+<section class="slide" data-ex="8" data-title="Densidad de Z">
+  <div class="inner">
+    <p class="eyebrow">Paso 4 · Eliminar r</p>
+    <h2 class="heading">La densidad de \(Z\)</h2>
+    <p class="question">Integramos \(6r\) en \(r\) sobre su rango. Como \(\int_0^{c} 6r\,dr = 3c^2\), hay dos casos:</p>
+    <div class="formula" data-b>\[0 \lt z \le \tfrac12:\qquad f_Z(z) = \int_0^{2z} 6r\,dr = 3(2z)^2 = 12z^2\]</div>
+    <div class="formula" data-b>\[\tfrac12 \lt z \lt 1:\qquad f_Z(z) = \int_0^{2(1-z)} 6r\,dr = 3\bigl(2(1-z)\bigr)^2 = 12(1-z)^2\]</div>
+    <div class="formula formula--chart" data-b>\[\D{fz}{f_Z(z)} = \begin{cases} 12z^2, & 0 \lt z \le \tfrac12 \\[2pt] 12(1-z)^2, & \tfrac12 \lt z \lt 1 \\[2pt] 0, & \text{en otro caso} \end{cases}\]</div>
+    <p class="note" data-b><b>Comprobación.</b> \(\int_0^{1/2} 12z^2\,dz = 4\cdot\tfrac18 = \tfrac12\), y la otra mitad es simétrica: el total es \(1\). La densidad es simétrica alrededor de \(\tfrac12\) y tiene su pico ahí.</p>
+  </div>
+</section>

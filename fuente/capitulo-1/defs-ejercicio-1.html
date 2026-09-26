@@ -1,0 +1,27 @@
+  <div data-ex="1" data-k="Xi" data-t="Muestra aleatoria">Cuatro observaciones independientes, todas con la misma distribución Uniforme[0,1].</div>
+  <div data-ex="1" data-k="unif" data-t="Uniforme[0,1]">Todos los valores entre 0 y 1 son igual de probables. Densidad \(f(x) = 1\) en \([0,1]\).</div>
+  <div data-ex="1" data-k="x1" data-t="\(X_{(1)}\)">Primer estadístico de orden: el mínimo de la muestra.</div>
+  <div data-ex="1" data-k="x2" data-t="\(X_{(2)}\)">Segundo estadístico de orden: el 2.º valor más pequeño de los cuatro.</div>
+  <div data-ex="1" data-k="x3" data-t="\(X_{(3)}\)">Tercer estadístico de orden: el 3.er valor más pequeño de los cuatro.</div>
+  <div data-ex="1" data-k="x4" data-t="\(X_{(4)}\)">Cuarto estadístico de orden: el máximo de la muestra.</div>
+  <div data-ex="1" data-k="Z" data-t="\(Z\)">Distancia entre el 2.º y el 3.er valor ordenado, \(X_{(3)} - X_{(2)}\). Toma valores en \((0,1)\).</div>
+  <div data-ex="1" data-k="P" data-t="\(P\)">Probabilidad del evento entre paréntesis.</div>
+  <div data-ex="1" data-k="f" data-t="Densidad \(f\)">Densidad de cada \(X_i\). Para la Uniforme[0,1] vale 1 en todo el intervalo.</div>
+  <div data-ex="1" data-k="F" data-t="Distribución acumulada \(F\)">\(F(x) = P(X_i \le x)\). Para la Uniforme[0,1], \(F(x) = x\).</div>
+  <div data-ex="1" data-k="n" data-t="\(n\)">Tamaño de la muestra: el número de observaciones.</div>
+  <div data-ex="1" data-k="i" data-t="\(i\)">Posición del primer estadístico de orden. En este ejercicio \(i = 2\).</div>
+  <div data-ex="1" data-k="j" data-t="\(j\)">Posición del segundo estadístico de orden. En este ejercicio \(j = 3\).</div>
+  <div data-ex="1" data-k="u" data-t="\(u\)">Valor que toma \(X_{(i)}\); en este ejercicio, \(X_{(2)}\).</div>
+  <div data-ex="1" data-k="v" data-t="\(v\)">Valor que toma \(X_{(j)}\); en este ejercicio, \(X_{(3)}\).</div>
+  <div data-ex="1" data-k="fuv" data-t="Densidad conjunta">Densidad del par \((X_{(i)}, X_{(j)})\) evaluada en \(u\) y \(v\).</div>
+  <div data-ex="1" data-k="coef" data-t="Coeficiente">Número de formas de repartir las \(n\) observaciones en cinco grupos: debajo de \(u\), en \(u\), entre \(u\) y \(v\), en \(v\), encima de \(v\).</div>
+  <div data-ex="1" data-k="fact" data-t="Factoriales">\(4! = 24\), \(1! = 1\) y \(0! = 1\) por convención.</div>
+  <div data-ex="1" data-k="below" data-t="Grupo de abajo">Probabilidad de que las \(i-1\) observaciones más pequeñas caigan por debajo de \(u\).</div>
+  <div data-ex="1" data-k="between" data-t="Grupo del medio">Probabilidad de que las \(j-i-1\) observaciones intermedias caigan entre \(u\) y \(v\). Con \(i=2,\ j=3\) no hay ninguna, y el factor vale 1.</div>
+  <div data-ex="1" data-k="above" data-t="Grupo de arriba">Probabilidad de que las \(n-j\) observaciones más grandes caigan por encima de \(v\).</div>
+  <div data-ex="1" data-k="w" data-t="\(W\)">Variable auxiliar \(W = X_{(2)}\). La usamos para hacer un cambio de dos variables a dos variables; al final la eliminamos integrando.</div>
+  <div data-ex="1" data-k="J" data-t="Jacobiano">Determinante de las derivadas parciales. Corrige cómo cambian las áreas al pasar de \((u,v)\) a \((w,z)\). Aquí vale 1.</div>
+  <div data-ex="1" data-k="fwz" data-t="Densidad de \((W, Z)\)">Densidad conjunta de las nuevas variables \(W\) y \(Z\).</div>
+  <div data-ex="1" data-k="fz" data-t="Densidad de \(Z\)">Densidad marginal de \(Z\): se obtiene integrando la densidad conjunta sobre todos los valores posibles de \(w\).</div>
+  <div data-ex="1" data-k="a" data-t="\(a\)">Abreviatura \(a = 1 - z\): el mayor valor que puede tomar \(w\), porque \(w + z \lt 1\).</div>
+  <div data-ex="1" data-k="beta" data-t="Beta(1, 4)">Distribución con densidad \(4(1-z)^3\) en \((0,1)\). Es la misma distribución que tiene el mínimo de cuatro uniformes.</div>
